@@ -1,5 +1,6 @@
 export const NAVIGATION_ROUTES = {
     HOME: "/",
-    LOGIN: "/login",
+    AUTH: "/auth",
+    LOGIN: "/auth/login",
     REST: "*",
 };

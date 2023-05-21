@@ -1,9 +1,9 @@
 import { defineStyleConfig } from "@chakra-ui/react";
 
 const textTheme = defineStyleConfig({
-    // The styles all button have in common
     baseStyle: {
-        color: "black",
+        fontSize: "sm",
+        color: "text",
     },
     variants: {
         disabled: {
