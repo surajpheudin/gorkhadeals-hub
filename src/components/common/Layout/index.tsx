@@ -34,7 +34,7 @@ const Layout = () => {
                 p={4}
             >
                 <NavLink to={"/"}>
-                    <Text>Terms & Service</Text>
+                    <Text>Terms of Service</Text>
                 </NavLink>
                 <NavLink to={"/"}>
                     <Text>Privacy Policy</Text>

@@ -8,6 +8,8 @@ import {
 import { NAVIGATION_ROUTES } from "@src/routes/constants";
 import { NavLink } from "react-router-dom";
 
+const url = "http://localhost:8000/google";
+
 const Login = () => {
     return (
         <Grid
@@ -37,12 +39,10 @@ const Login = () => {
                 >
                     Log in to Gorkhadeals Hub
                 </Heading>
-                <NavLink
-                    to="https://google.com"
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    <Flex
+
+                <NavLink to={url} tabIndex={0}>
+                    <Box
+                        display={"flex"}
                         justifyContent={"center"}
                         alignItems="center"
                         gap={2}
@@ -52,7 +52,7 @@ const Login = () => {
                     >
                         <GoogleIcon height={"20px"} />
                         <Text fontWeight={"semibold"}>Log in with Google</Text>
-                    </Flex>
+                    </Box>
                 </NavLink>
                 <Box>
                     <Text py={4} textAlign="center">
