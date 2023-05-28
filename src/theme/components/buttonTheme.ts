@@ -1,9 +1,9 @@
 import { defineStyle, defineStyleConfig } from "@chakra-ui/react";
 
 const solidPrimary = defineStyle({
-    background: "blue.300",
+    background: "blue.400",
     _hover: {
-        background: "blue.400",
+        background: "blue.500",
     },
 });
 
@@ -19,11 +19,10 @@ export const buttonTheme = defineStyleConfig({
     baseStyle: {},
     variants: {
         solid: ({ colorScheme }) => ({
+            fontSize: "sm",
             ...(colorScheme === "primary" && solidPrimary),
             ...(colorScheme === "gray" && grayPrimary),
         }),
     },
-    defaultProps: {
-        colorScheme: "primary",
-    },
+    defaultProps: {},
 });

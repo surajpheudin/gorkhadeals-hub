@@ -4,3 +4,6 @@ export { ReactComponent as LogoutIcon } from "./svgs/logout.svg";
 export { ReactComponent as SettingsIcon } from "./svgs/settings.svg";
 export { ReactComponent as AddBusinessIcon } from "./svgs/add-business.svg";
 export { ReactComponent as PeopleIcon } from "./svgs/people.svg";
+export { ReactComponent as AddIcon } from "./svgs/add.svg";
+export { ReactComponent as MenuUnfoldIcon } from "./svgs/menu-unfold.svg";
+export { ReactComponent as SearchIcon } from "./svgs/search.svg";

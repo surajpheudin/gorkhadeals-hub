@@ -1,7 +1,9 @@
-import { Avatar, Box } from "@chakra-ui/react";
+import { As, Avatar, Box } from "@chakra-ui/react";
+import { useLocation } from "react-router-dom";
 
-const ShopButton = () => {
-    const isActive = true;
+const ShopButton = ({ to }: IShopButton) => {
+    const location = useLocation();
+    const isActive = location.pathname === to;
     return (
         <Box as="button" pl={3} pr={3} position="relative">
             {isActive && (
@@ -20,8 +22,13 @@ const ShopButton = () => {
                 />
             )}
 
-            <Avatar name="Dan" />
+            <Avatar name="Dan" size={"md"} />
         </Box>
     );
 };
 export default ShopButton;
+
+interface IShopButton {
+    icon?: As;
+    to: string;
+}

@@ -1,28 +1,34 @@
-import { AddBusinessIcon } from "@assets/svgs";
+import { AddBusinessIcon, LogoutIcon, MenuUnfoldIcon } from "@assets/svgs";
 import {
     Avatar,
     Flex,
     IconButton,
-    Image,
     Menu,
     MenuButton,
     MenuItem,
     MenuList,
     Icon,
 } from "@chakra-ui/react";
-import { LOGO } from "@src/constants/images.constants";
+import useSession from "@src/hooks/session";
 
 const Header = () => {
+    const { handleLogout } = useSession();
     return (
         <Flex
             alignItems={"center"}
-            justifyContent="space-between"
+            justifyContent={{ base: "space-between", lg: "flex-end" }}
             py={2}
             px={4}
-            boxShadow="rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"
+            boxShadow="rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px"
         >
-            <Image src={LOGO} height="42px" />
-
+            <IconButton
+                variant={"ghost"}
+                icon={<Icon as={MenuUnfoldIcon} />}
+                aria-label={"menu"}
+                display={{
+                    lg: "none",
+                }}
+            />
             <Flex>
                 <Menu>
                     <MenuButton
@@ -69,16 +75,17 @@ const Header = () => {
                             Open Closed Tab
                         </MenuItem>
                         <MenuItem
+                            onClick={handleLogout}
                             icon={
                                 <Icon
                                     fontSize={"md"}
                                     display={"flex"}
                                     alignItems={"center"}
-                                    as={AddBusinessIcon}
+                                    as={LogoutIcon}
                                 />
                             }
                         >
-                            Open File...
+                            Logout
                         </MenuItem>
                     </MenuList>
                 </Menu>

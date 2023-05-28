@@ -14,9 +14,7 @@ const NavItem = ({ icon, label }: INavItem) => {
             }}
         >
             <Icon as={icon} />
-            <Text fontSize={"16px"} textTransform={"capitalize"}>
-                {label}
-            </Text>
+            <Text textTransform={"capitalize"}>{label}</Text>
         </Flex>
     );
 };

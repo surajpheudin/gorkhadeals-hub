@@ -1,5 +1,5 @@
 import { AddBusinessIcon, PeopleIcon, SettingsIcon } from "@assets/svgs";
-import { Grid } from "@chakra-ui/react";
+import { Box, Grid, Text } from "@chakra-ui/react";
 import NavItem from "./NavItem";
 
 const Sidebar = () => {
@@ -7,10 +7,21 @@ const Sidebar = () => {
         <Grid
             alignContent={"flex-start"}
             py={2}
-            boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"
+            boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px"
             gap={1}
-            h={"calc(100vh - 60px)"}
+            h={"100vh"}
+            backgroundColor="gray.50"
+            zIndex={"dropdown"}
+            w="250px"
         >
+            <Box
+                px={2}
+                py={3.5}
+                borderBottomWidth="1px"
+                borderColor={"gray.300"}
+            >
+                <Text textAlign={"center"}>Dashboard</Text>
+            </Box>
             {MENUS.map(({ icon, label }) => (
                 <NavItem key={label} icon={icon} label={label} />
             ))}

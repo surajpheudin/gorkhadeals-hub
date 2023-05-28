@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = import.meta.env.BASE_URL;
+const baseURL = import.meta.env.VITE_APP_BACKEND_URL;
 const THREE_MINUTES = 1000 * 60 * 3;
 const AxiosAuthInstance = axios.create({
     baseURL,
