@@ -1,16 +1,26 @@
 import { GoogleIcon } from "@assets/svgs";
-import { Box, Flex, Grid, Heading, Image, Text } from "@chakra-ui/react";
+import {
+    Box,
+    Flex,
+    Grid,
+    Heading,
+    Image,
+    Spinner,
+    Text,
+} from "@chakra-ui/react";
 import {
     DownloadFromAppstore,
     DownloadFromPlaystore,
     LOGO,
 } from "@src/constants/images.constants";
 import { NAVIGATION_ROUTES } from "@src/routes/constants";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const url = "http://localhost:8000/google";
 
 const Login = () => {
+    const [isLoading, setIsLoading] = useState(false);
     return (
         <Grid
             placeItems="center"
@@ -40,7 +50,11 @@ const Login = () => {
                     Log in to Gorkhadeals Hub
                 </Heading>
 
-                <NavLink to={url} tabIndex={0}>
+                <NavLink
+                    to={url}
+                    tabIndex={0}
+                    onClick={() => setIsLoading(true)}
+                >
                     <Box
                         display={"flex"}
                         justifyContent={"center"}
@@ -50,8 +64,16 @@ const Login = () => {
                         p={3}
                         borderRadius="lg"
                     >
-                        <GoogleIcon height={"20px"} />
-                        <Text fontWeight={"semibold"}>Log in with Google</Text>
+                        {isLoading ? (
+                            <Spinner size={"sm"} />
+                        ) : (
+                            <>
+                                <GoogleIcon height={"20px"} />
+                                <Text fontWeight={"semibold"}>
+                                    Log in with Google
+                                </Text>
+                            </>
+                        )}
                     </Box>
                 </NavLink>
                 <Box>

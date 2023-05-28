@@ -11,6 +11,7 @@ import { NavLink, Outlet } from "react-router-dom";
 
 const Layout = () => {
     const { toggleColorMode } = useColorMode();
+
     return (
         <Box>
             <Flex px={4} py={2} position="fixed" left={0} right={0}>

@@ -15,7 +15,9 @@
         "@chakra-ui/react": "^2.5.1",
         "@emotion/react": "^11.10.6",
         "@emotion/styled": "^11.10.6",
+        "axios": "^1.4.0",
         "framer-motion": "^10.3.2",
+        "js-cookie": "^3.0.5",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-router-dom": "^6.9.0",
@@ -24,6 +26,7 @@
     "devDependencies": {
         "@commitlint/cli": "^17.4.4",
         "@commitlint/config-conventional": "^17.4.4",
+        "@types/js-cookie": "^3.0.3",
         "@types/react": "^18.0.27",
         "@types/react-dom": "^18.0.10",
         "@typescript-eslint/eslint-plugin": "^5.55.0",
