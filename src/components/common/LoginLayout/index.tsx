@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { NavLink, Outlet } from "react-router-dom";
 
-const Layout = () => {
+const LoginLayout = () => {
     const { toggleColorMode } = useColorMode();
 
     return (
@@ -45,4 +45,4 @@ const Layout = () => {
     );
 };
 
-export default Layout;
+export default LoginLayout;

@@ -1,6 +1,6 @@
 import DashbaordLayout from "@components/common/DashboardLayout";
 import GlobalLoader from "@components/common/GlobalLoader/GlobalLoader";
-import Layout from "@components/common/Layout";
+import LoginLayout from "@components/common/LoginLayout";
 import Home from "@src/pages";
 import ErrorPage from "@src/pages/ErrorPage";
 import Login from "@src/pages/Login";
@@ -11,7 +11,7 @@ import { NAVIGATION_ROUTES } from "./constants";
 export const router = createBrowserRouter([
     {
         path: NAVIGATION_ROUTES.AUTH,
-        element: <Layout />,
+        element: <LoginLayout />,
         children: [
             {
                 path: NAVIGATION_ROUTES.LOGIN,

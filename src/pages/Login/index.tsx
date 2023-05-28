@@ -13,7 +13,6 @@ import {
     DownloadFromPlaystore,
     LOGO,
 } from "@src/constants/images.constants";
-import { NAVIGATION_ROUTES } from "@src/routes/constants";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -63,6 +62,7 @@ const Login = () => {
                         boxShadow="rgba(0,0,0,0.2) 1px 1px 5px 0"
                         p={3}
                         borderRadius="lg"
+                        height={"45px"}
                     >
                         {isLoading ? (
                             <Spinner size={"sm"} />
@@ -82,7 +82,7 @@ const Login = () => {
                     </Text>
                     <Flex justifyContent={"center"} flexWrap="wrap" gap={2}>
                         {DOWNLOADS.map(({ image, link, id }) => (
-                            <NavLink key={id} to={link}>
+                            <NavLink key={id} to={link} target={"_blank"}>
                                 <Image src={image} height={"40px"} />
                             </NavLink>
                         ))}
@@ -99,11 +99,11 @@ const DOWNLOADS = [
     {
         id: 1,
         image: DownloadFromAppstore,
-        link: NAVIGATION_ROUTES.HOME,
+        link: "https://www.apple.com/app-store",
     },
     {
         id: 2,
         image: DownloadFromPlaystore,
-        link: NAVIGATION_ROUTES.HOME,
+        link: "https://play.google.com",
     },
 ];
