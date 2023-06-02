@@ -32,7 +32,6 @@ const DashbaordLayout = () => {
                                 <Button
                                     width={"100px"}
                                     onClick={() => navigate(-1)}
-                                    colorScheme="primary"
                                 >
                                     Back
                                 </Button>

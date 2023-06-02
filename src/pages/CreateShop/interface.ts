@@ -1,5 +1,3 @@
-export interface ICreateShopForm {
-    registeredName: string;
-    displayName: string;
-    email: string;
-}
+import { ICreateShopRequest } from "@src/services/shop/interface";
+
+export interface ICreateShopForm extends ICreateShopRequest {}
