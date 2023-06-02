@@ -2,6 +2,7 @@ import DashbaordLayout from "@components/common/DashboardLayout";
 import GlobalLoader from "@components/common/GlobalLoader/GlobalLoader";
 import LoginLayout from "@components/common/LoginLayout";
 import Home from "@src/pages";
+import CreateShop from "@src/pages/CreateShop";
 import ErrorPage from "@src/pages/ErrorPage";
 import Login from "@src/pages/Login";
 import NotFoundPage from "@src/pages/NotFoundPage";
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 element: <Home />,
+            },
+            {
+                path: NAVIGATION_ROUTES.CREATE_SHOP,
+                element: <CreateShop />,
             },
         ],
     },

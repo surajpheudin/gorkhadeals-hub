@@ -1,13 +1,18 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import withAuth from "@components/hoc/withAuth";
-import { Outlet, useLocation } from "react-router-dom";
+import { NAVIGATION_ROUTES } from "@src/routes/constants";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Header from "../Header";
 import ShopsBar from "../ShopsBar";
 import Sidebar from "../Sidebar";
 
 const DashbaordLayout = () => {
+    const navigate = useNavigate();
     const location = useLocation();
     const hideSidebar = HIDE_SIDEBAR_AT.includes(location.pathname);
+
+    const hideBackButton = location.pathname === NAVIGATION_ROUTES.HOME;
+
     return (
         <Flex>
             <ShopsBar />
@@ -20,7 +25,19 @@ const DashbaordLayout = () => {
                         as="main"
                         h={"calc(100vh - 60px)"}
                         overflowY="auto"
+                        p={5}
                     >
+                        {!hideBackButton && (
+                            <Flex mb={5}>
+                                <Button
+                                    width={"100px"}
+                                    onClick={() => navigate(-1)}
+                                    colorScheme="primary"
+                                >
+                                    Back
+                                </Button>
+                            </Flex>
+                        )}
                         <Outlet />
                     </Box>
                 </Box>

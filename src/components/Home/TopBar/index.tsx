@@ -7,8 +7,11 @@ import {
     InputLeftElement,
     Icon,
 } from "@chakra-ui/react";
+import { NAVIGATION_ROUTES } from "@src/routes/constants";
+import { useNavigate } from "react-router-dom";
 
 const TopBar = () => {
+    const navigate = useNavigate();
     return (
         <Flex gap={4}>
             <InputGroup>
@@ -17,7 +20,11 @@ const TopBar = () => {
                 </InputLeftElement>
                 <Input type="tel" placeholder="Search..." />
             </InputGroup>
-            <Button colorScheme={"primary"} leftIcon={<Icon as={AddIcon} />}>
+            <Button
+                colorScheme={"primary"}
+                leftIcon={<Icon as={AddIcon} />}
+                onClick={() => navigate(NAVIGATION_ROUTES.CREATE_SHOP)}
+            >
                 Add Shop
             </Button>
         </Flex>

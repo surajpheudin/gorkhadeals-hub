@@ -3,4 +3,6 @@ export const NAVIGATION_ROUTES = {
     AUTH: "/auth",
     LOGIN: "/auth/login",
     REST: "*",
+
+    CREATE_SHOP: "create-shop",
 };
