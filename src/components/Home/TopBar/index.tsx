@@ -10,7 +10,7 @@ import {
 import { NAVIGATION_ROUTES } from "@src/routes/constants";
 import { useNavigate } from "react-router-dom";
 
-const TopBar = () => {
+const TopBar = ({ setSearch }: ITopBar) => {
     const navigate = useNavigate();
     return (
         <Flex gap={4}>
@@ -18,7 +18,11 @@ const TopBar = () => {
                 <InputLeftElement pointerEvents="none" p={2.5} color="gray.400">
                     <SearchIcon />
                 </InputLeftElement>
-                <Input type="tel" placeholder="Search..." />
+                <Input
+                    type="tel"
+                    placeholder="Search..."
+                    onChange={(e) => setSearch(e.target.value)}
+                />
             </InputGroup>
             <Button
                 colorScheme={"primary"}
@@ -32,3 +36,7 @@ const TopBar = () => {
 };
 
 export default TopBar;
+
+export interface ITopBar {
+    setSearch: (value: string) => void;
+}

@@ -1,12 +1,23 @@
 import { AddIcon, LogoutIcon } from "@assets/svgs";
 import { Avatar, Box, Divider, Grid, Icon, IconButton } from "@chakra-ui/react";
 import useSession from "@src/hooks/session";
+import ErrorPage from "@src/pages/ErrorPage";
 import { NAVIGATION_ROUTES } from "@src/routes/constants";
+import { useGetShops } from "@src/services/shop/queries";
 import { Link } from "react-router-dom";
+import GlobalLoader from "../GlobalLoader/GlobalLoader";
 import ShopButton from "./ShopButton";
 
 const ShopsBar = () => {
     const { handleLogout } = useSession();
+    const { data, isError, isLoading } = useGetShops();
+    if (isLoading) {
+        return <GlobalLoader />;
+    }
+
+    if (isError) {
+        return <ErrorPage />;
+    }
     return (
         <Grid
             backgroundColor="gray.200"
@@ -32,8 +43,12 @@ const ShopsBar = () => {
                 {divider}
             </Box>
             <Grid gap={3} alignContent="flex-start">
-                {new Array(5).fill(0).map((item, i) => (
-                    <ShopButton key={i} to={item} />
+                {data?.map(({ id, displayName }) => (
+                    <ShopButton
+                        key={id}
+                        to={id?.toString()}
+                        name={displayName}
+                    />
                 ))}
                 <IconButton
                     backgroundColor={"gray.300"}

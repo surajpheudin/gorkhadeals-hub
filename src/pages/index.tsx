@@ -1,9 +1,44 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Grid } from "@chakra-ui/react";
 import TopBar from "@components/Home/TopBar";
+import ShopCard from "@components/ShopCard";
+import { debounce } from "lodash";
+import { useGetShops } from "@src/services/shop/queries";
+import { useCallback, useState } from "react";
+import ErrorPage from "./ErrorPage";
+import NoData from "@components/common/NoData";
 const Home = () => {
+    const [search, setSearch] = useState("");
+    const { data, isError } = useGetShops({
+        search: search,
+    });
+
+    const handleSearch = useCallback(
+        debounce((value) => {
+            setSearch(value);
+        }, 1000),
+        []
+    );
+
+    if (isError) {
+        return <ErrorPage />;
+    }
     return (
         <Box p={4}>
-            <TopBar />
+            <TopBar setSearch={handleSearch} />
+
+            {data?.length === 0 ? (
+                <NoData />
+            ) : (
+                <Grid
+                    mt={"12"}
+                    gridTemplateColumns={"repeat(auto-fill,minmax(300px,1fr))"}
+                    gap={5}
+                >
+                    {data?.map((item) => (
+                        <ShopCard key={item?.id} {...item} />
+                    ))}
+                </Grid>
+            )}
         </Box>
     );
 };

@@ -2,7 +2,10 @@ import { defineStyleConfig } from "@chakra-ui/react";
 
 const textTheme = defineStyleConfig({
     baseStyle: {
-        fontSize: "sm",
+        fontSize: {
+            base: "sm",
+            md: "md",
+        },
         color: "text",
     },
     variants: {

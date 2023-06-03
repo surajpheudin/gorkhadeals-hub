@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import useSession from "@src/hooks/session";
 
+export const HEADER_HEIGHT = 60;
 const Header = () => {
     const { handleLogout } = useSession();
     return (
@@ -19,7 +20,8 @@ const Header = () => {
             justifyContent={{ base: "space-between", lg: "flex-end" }}
             py={2}
             px={4}
-            boxShadow="rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px"
+            boxShadow="rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px"
+            height={`${HEADER_HEIGHT}px`}
         >
             <IconButton
                 variant={"ghost"}
@@ -29,7 +31,7 @@ const Header = () => {
                     lg: "none",
                 }}
             />
-            <Flex>
+            <Flex pr={4}>
                 <Menu>
                     <MenuButton
                         as={IconButton}

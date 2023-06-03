@@ -13,7 +13,7 @@ const NavItem = ({ icon, label }: INavItem) => {
                 backgroundColor: "gray.200",
             }}
         >
-            <Icon as={icon} />
+            <Icon as={icon} fontSize="lg" />
             <Text textTransform={"capitalize"}>{label}</Text>
         </Flex>
     );

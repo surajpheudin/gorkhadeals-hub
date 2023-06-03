@@ -1,13 +1,27 @@
 import { Box, Image, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import MDropzone from "react-dropzone";
+import { FieldValues, useController } from "react-hook-form";
 import { IDropzone } from "./interface";
 
-const Dropzone = (props: IDropzone) => {
-    const { setFiles, defaultImage, maxSizeInMb, accept = "" } = props;
+const Dropzone = <T extends FieldValues>(props: IDropzone<T>) => {
+    const {
+        setFiles,
+        defaultImage,
+        maxSizeInMb,
+        accept = "",
+        control,
+        name,
+    } = props;
     const [previewImageSrc, setPreviewImageSrc] = useState("");
     const [error, setError] = useState("");
 
+    const {
+        field: { onChange },
+    } = useController({
+        name,
+        control,
+    });
     const handleImageChange = (files: File[]) => {
         const MAX_SIZE = maxSizeInMb * 1024 * 1024;
         const size = files[0]?.size;
@@ -19,6 +33,7 @@ const Dropzone = (props: IDropzone) => {
             setError("");
             setPreviewImageSrc(URL.createObjectURL(files[0]));
             setFiles(files);
+            onChange(files);
         }
     };
 
@@ -31,6 +46,7 @@ const Dropzone = (props: IDropzone) => {
     return (
         <>
             <Box
+                cursor={"pointer"}
                 sx={{
                     "& section > div": {
                         height: "200px",

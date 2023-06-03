@@ -1,3 +1,13 @@
+export interface IShop {
+    displayName: string;
+    registeredName: string;
+    email: string;
+    image: string;
+    id: number;
+    createdAt: string;
+    updateAt: string;
+}
+
 export enum MimeTypes {
     ".aac" = "audio/aac",
     ".abw" = "application/x-abiword",
