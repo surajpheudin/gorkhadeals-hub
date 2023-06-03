@@ -3,6 +3,7 @@ export const api = {
     logout: "logout",
     createShop: "shop",
     getShops: "shop",
+    getShop: "shop/:id",
 };
 
 export const ACCESS_TOKEN = "access_token";

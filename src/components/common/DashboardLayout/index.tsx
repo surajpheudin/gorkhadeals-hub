@@ -11,7 +11,7 @@ const DashbaordLayout = () => {
     const location = useLocation();
     const hideSidebar = HIDE_SIDEBAR_AT.includes(location.pathname);
 
-    const hideBackButton = location.pathname === NAVIGATION_ROUTES.HOME;
+    const hideBackButton = [NAVIGATION_ROUTES.HOME].includes(location.pathname);
 
     return (
         <Flex>

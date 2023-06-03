@@ -14,11 +14,17 @@ export const createShop = async (params: ICreateShopRequest) => {
 };
 
 export const getShops = (params?: { search: string }) => async () => {
-    console.log("params", params);
-
     const data = await AxiosAuthInstance.get<IShop[]>(api.getShops, {
         params,
     });
+
+    return data.data;
+};
+
+export const getShop = (id: string) => async () => {
+    const data = await AxiosAuthInstance.get<IShop>(
+        api.getShop.replace(":id", id)
+    );
 
     return data.data;
 };

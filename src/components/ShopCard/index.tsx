@@ -1,5 +1,7 @@
 import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
+import { NAVIGATION_ROUTES } from "@src/routes/constants";
 import { formatDaysAgo } from "@src/utils/date";
+import { useNavigate } from "react-router-dom";
 import { IShopCard } from "./interface";
 
 const ShopCard = ({
@@ -7,7 +9,12 @@ const ShopCard = ({
     registeredName,
     image,
     createdAt,
+    id,
 }: IShopCard) => {
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate(NAVIGATION_ROUTES.SHOP.replace(":id", id?.toString()), {});
+    };
     return (
         <Box
             p={{
@@ -23,6 +30,7 @@ const ShopCard = ({
             _hover={{
                 boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
             }}
+            onClick={handleClick}
         >
             <Flex alignItems={"center"} gap={4}>
                 <Image

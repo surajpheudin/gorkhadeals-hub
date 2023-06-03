@@ -1,14 +1,23 @@
 import { AddIcon, LogoutIcon } from "@assets/svgs";
-import { Avatar, Box, Divider, Grid, Icon, IconButton } from "@chakra-ui/react";
+import {
+    Avatar,
+    Box,
+    Divider,
+    Grid,
+    Icon,
+    IconButton,
+    Tooltip,
+} from "@chakra-ui/react";
 import useSession from "@src/hooks/session";
 import ErrorPage from "@src/pages/ErrorPage";
 import { NAVIGATION_ROUTES } from "@src/routes/constants";
 import { useGetShops } from "@src/services/shop/queries";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GlobalLoader from "../GlobalLoader/GlobalLoader";
 import ShopButton from "./ShopButton";
 
 const ShopsBar = () => {
+    const navigate = useNavigate();
     const { handleLogout } = useSession();
     const { data, isError, isLoading } = useGetShops();
     if (isLoading) {
@@ -44,19 +53,18 @@ const ShopsBar = () => {
             </Box>
             <Grid gap={3} alignContent="flex-start">
                 {data?.map(({ id, displayName }) => (
-                    <ShopButton
-                        key={id}
-                        to={id?.toString()}
-                        name={displayName}
-                    />
+                    <ShopButton key={id} id={id} name={displayName} />
                 ))}
-                <IconButton
-                    backgroundColor={"gray.300"}
-                    rounded="full"
-                    icon={<Icon color={"black"} as={AddIcon} />}
-                    aria-label={"add shop"}
-                    mx="auto"
-                />
+                <Tooltip label={"Add Shop"}>
+                    <IconButton
+                        backgroundColor={"gray.300"}
+                        rounded="full"
+                        icon={<Icon color={"black"} as={AddIcon} />}
+                        aria-label={"add shop"}
+                        mx="auto"
+                        onClick={() => navigate(NAVIGATION_ROUTES.CREATE_SHOP)}
+                    />
+                </Tooltip>
             </Grid>
             <Box mx={"auto"}>
                 {divider}

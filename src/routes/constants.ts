@@ -4,5 +4,7 @@ export const NAVIGATION_ROUTES = {
     LOGIN: "/auth/login",
     REST: "*",
 
-    CREATE_SHOP: "create-shop",
+    CREATE_SHOP: "/create-shop",
+    SHOP: "/shop/:id",
+    SHOP_MEMBERS: "/shop/:id/members",
 };

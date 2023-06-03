@@ -9,3 +9,4 @@ export { ReactComponent as MenuUnfoldIcon } from "./svgs/menu-unfold.svg";
 export { ReactComponent as SearchIcon } from "./svgs/search.svg";
 export { ReactComponent as ShopIcon } from "./svgs/shop.svg";
 export { ReactComponent as InviteIcon } from "./svgs/invite.svg";
+export { ReactComponent as PeopleRoofIcon } from "./svgs/people-roof.svg";

@@ -1,9 +1,23 @@
-import { InviteIcon, SettingsIcon } from "@assets/svgs";
+import {
+    AddBusinessIcon,
+    InviteIcon,
+    PeopleIcon,
+    SettingsIcon,
+} from "@assets/svgs";
 import { Flex, Grid, Text } from "@chakra-ui/react";
+import { NAVIGATION_ROUTES } from "@src/routes/constants";
+import { useLocation } from "react-router-dom";
 import { HEADER_HEIGHT } from "../Header";
 import NavItem from "./NavItem";
 
 const Sidebar = () => {
+    const location = useLocation();
+    const isUserSidebar = [
+        NAVIGATION_ROUTES.HOME,
+        NAVIGATION_ROUTES.CREATE_SHOP,
+    ].includes(location.pathname);
+
+    const menu = isUserSidebar ? MENUS : SHOP_MENUS;
     return (
         <Grid
             alignContent={"flex-start"}
@@ -24,8 +38,8 @@ const Sidebar = () => {
             >
                 <Text textAlign={"center"}>Dashboard</Text>
             </Flex>
-            {MENUS.map(({ icon, label }) => (
-                <NavItem key={label} icon={icon} label={label} />
+            {menu.map(({ icon, label, to }) => (
+                <NavItem key={label} icon={icon} label={label} to={to} />
             ))}
         </Grid>
     );
@@ -33,28 +47,33 @@ const Sidebar = () => {
 
 export default Sidebar;
 
-// const SHOP_MENUS = [
-//     {
-//         icon: SettingsIcon,
-//         label: "Preference",
-//     },
-//     {
-//         icon: PeopleIcon,
-//         label: "Members",
-//     },
-//     {
-//         icon: AddBusinessIcon,
-//         label: "Integration (Addons)",
-//     },
-// ];
+const SHOP_MENUS = [
+    {
+        icon: SettingsIcon,
+        label: "Preference",
+        to: "",
+    },
+    {
+        icon: PeopleIcon,
+        label: "Members",
+        to: NAVIGATION_ROUTES.SHOP_MEMBERS,
+    },
+    {
+        icon: AddBusinessIcon,
+        label: "Integration (Addons)",
+        to: "",
+    },
+];
 
 const MENUS = [
     {
         icon: SettingsIcon,
         label: "Preference",
+        to: "",
     },
     {
         icon: InviteIcon,
         label: "Invitation",
+        to: "",
     },
 ];

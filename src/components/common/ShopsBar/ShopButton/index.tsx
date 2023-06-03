@@ -1,11 +1,25 @@
-import { Avatar, Box } from "@chakra-ui/react";
-import { useLocation } from "react-router-dom";
+import { Avatar, Box, Tooltip } from "@chakra-ui/react";
+import { NAVIGATION_ROUTES } from "@src/routes/constants";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const ShopButton = ({ to, name }: IShopButton) => {
+const ShopButton = ({ id, name }: IShopButton) => {
     const location = useLocation();
+    const navigate = useNavigate();
+
+    const to = NAVIGATION_ROUTES.SHOP.replace(":id", id?.toString());
     const isActive = location.pathname === to;
+
+    const handleClick = () => {
+        navigate(to);
+    };
     return (
-        <Box as="button" pl={3} pr={3} position="relative">
+        <Box
+            as="button"
+            pl={3}
+            pr={3}
+            position="relative"
+            onClick={handleClick}
+        >
             {isActive && (
                 <Box
                     sx={{
@@ -21,14 +35,15 @@ const ShopButton = ({ to, name }: IShopButton) => {
                     }}
                 />
             )}
-
-            <Avatar name={name} size={"md"} />
+            <Tooltip label={name}>
+                <Avatar name={name} size={"md"} />
+            </Tooltip>
         </Box>
     );
 };
 export default ShopButton;
 
 interface IShopButton {
-    to: string;
+    id: number;
     name: string;
 }
