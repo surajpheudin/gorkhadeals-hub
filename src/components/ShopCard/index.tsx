@@ -1,6 +1,6 @@
-import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import Card from "@components/library/Card";
 import { NAVIGATION_ROUTES } from "@src/routes/constants";
-import { formatDaysAgo } from "@src/utils/date";
 import { useNavigate } from "react-router-dom";
 import { IShopCard } from "./interface";
 
@@ -32,24 +32,13 @@ const ShopCard = ({
             }}
             onClick={handleClick}
         >
-            <Flex alignItems={"center"} gap={4}>
-                <Image
-                    height={"32px"}
-                    width={"32px"}
-                    src={image}
-                    fallbackSrc="/svg/shop.svg"
-                />
-                <Box>
-                    <Heading fontWeight={"medium"} fontSize="md">
-                        {displayName}
-                    </Heading>
-                    <Text color={"gray.700"}>{registeredName}</Text>
-                </Box>
-            </Flex>
-
-            <Text mt={4} color={"gray.500"}>
-                {formatDaysAgo(new Date(createdAt))}
-            </Text>
+            <Card
+                variant="one"
+                image={image}
+                title={displayName}
+                description={registeredName}
+                relativeDate={createdAt}
+            />
         </Box>
     );
 };

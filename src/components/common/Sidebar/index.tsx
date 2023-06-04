@@ -15,6 +15,7 @@ const Sidebar = () => {
     const isUserSidebar = [
         NAVIGATION_ROUTES.HOME,
         NAVIGATION_ROUTES.CREATE_SHOP,
+        NAVIGATION_ROUTES.SHOP_INVITAIONS,
     ].includes(location.pathname);
 
     const menu = isUserSidebar ? MENUS : SHOP_MENUS;
@@ -73,7 +74,7 @@ const MENUS = [
     },
     {
         icon: InviteIcon,
-        label: "Invitation",
-        to: "",
+        label: "Invitations",
+        to: NAVIGATION_ROUTES.SHOP_INVITAIONS,
     },
 ];

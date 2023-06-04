@@ -10,10 +10,13 @@ import {
     Icon,
 } from "@chakra-ui/react";
 import useSession from "@src/hooks/session";
+import { useGetLoggedInUser } from "@src/services/user/queries";
 
 export const HEADER_HEIGHT = 60;
 const Header = () => {
+    const { data } = useGetLoggedInUser();
     const { handleLogout } = useSession();
+
     return (
         <Flex
             alignItems={"center"}
@@ -36,7 +39,13 @@ const Header = () => {
                     <MenuButton
                         as={IconButton}
                         aria-label="Options"
-                        icon={<Avatar size={"sm"} />}
+                        icon={
+                            <Avatar
+                                size={"sm"}
+                                src={data?.picture}
+                                referrerPolicy="no-referrer"
+                            />
+                        }
                         variant="unstyled"
                     />
                     <MenuList>

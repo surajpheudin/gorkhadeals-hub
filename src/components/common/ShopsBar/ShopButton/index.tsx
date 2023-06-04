@@ -13,13 +13,7 @@ const ShopButton = ({ id, name }: IShopButton) => {
         navigate(to);
     };
     return (
-        <Box
-            as="button"
-            pl={3}
-            pr={3}
-            position="relative"
-            onClick={handleClick}
-        >
+        <Box as="button" px={3} position="relative" onClick={handleClick}>
             {isActive && (
                 <Box
                     sx={{
@@ -44,6 +38,6 @@ const ShopButton = ({ id, name }: IShopButton) => {
 export default ShopButton;
 
 interface IShopButton {
-    id: number;
+    id: string;
     name: string;
 }

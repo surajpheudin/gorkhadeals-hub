@@ -6,8 +6,9 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { useInviteMember } from "@src/services/shop/mutations";
 
-const AddMemberForm = () => {
+const AddMemberForm = ({ onSuccess }: { onSuccess: () => void }) => {
     const params = useParams();
     const id = params?.id ?? "";
     const {
@@ -20,9 +21,18 @@ const AddMemberForm = () => {
         resolver: yupResolver(schema),
     });
     const { data: shop } = useGetShop(id);
+    const { mutate, isLoading } = useInviteMember();
 
-    const onSubmit = () => {
-        return;
+    const onSubmit = (data: typeof defaultValues) => {
+        mutate(
+            {
+                id,
+                ...data,
+            },
+            {
+                onSuccess,
+            }
+        );
     };
 
     return (
@@ -40,12 +50,15 @@ const AddMemberForm = () => {
                     control={control}
                     placeholder="Enter email address"
                     autoComplete="off"
+                    autoFocus
                 />
                 <Button
                     mt={2}
                     width={"full"}
                     colorScheme="primary"
                     isDisabled={!isValid}
+                    type="submit"
+                    isLoading={isLoading}
                 >
                     Invite {isValid ? watch("email") : "member"} to this shop
                 </Button>

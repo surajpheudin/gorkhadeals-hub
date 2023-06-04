@@ -1,13 +1,40 @@
+export interface IUser {
+    id: number;
+    email: string;
+    fullname: string;
+    picture: string;
+}
+
 export interface IShop {
     displayName: string;
     registeredName: string;
     email: string;
     image: string;
-    id: number;
+    id: string;
     createdAt: string;
     updateAt: string;
 }
 
+export interface IShopMember {
+    id: string;
+    roleId: string;
+    businessUserId: string;
+    shopId: string;
+    status: MemberStatus;
+    createdAt: string;
+    updateAt: string;
+    businessUser: IUser;
+    role: IRole;
+}
+
+export interface IRole {
+    id: string;
+    name: RoleName;
+    createdAt: string;
+    updateAt: string;
+}
+export type MemberStatus = "INVITED" | "JOINED";
+export type RoleName = "ADMINISTRATOR" | "MEMBER";
 export enum MimeTypes {
     ".aac" = "audio/aac",
     ".abw" = "application/x-abiword",

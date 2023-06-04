@@ -7,6 +7,7 @@ import ErrorPage from "@src/pages/ErrorPage";
 import Login from "@src/pages/Login";
 import NotFoundPage from "@src/pages/NotFoundPage";
 import Shop from "@src/pages/Shop";
+import ShopInvitation from "@src/pages/ShopInvitation";
 import ShopMembers from "@src/pages/ShopMembers";
 import { createBrowserRouter } from "react-router-dom";
 import { NAVIGATION_ROUTES } from "./constants";
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
             {
                 path: NAVIGATION_ROUTES.CREATE_SHOP,
                 element: <CreateShop />,
+            },
+            {
+                path: NAVIGATION_ROUTES.SHOP_INVITAIONS,
+                element: <ShopInvitation />,
             },
             {
                 path: NAVIGATION_ROUTES.SHOP,

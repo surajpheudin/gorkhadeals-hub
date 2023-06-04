@@ -11,7 +11,7 @@ export type ISelectField<T extends FieldValues = FieldValues> = SelectProps & {
     onCustomChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
-export interface ISelectOption {
+export interface ISelectOption<T = string> {
     label: string;
-    value: string;
+    value: T;
 }

@@ -5,6 +5,7 @@ export const NAVIGATION_ROUTES = {
     REST: "*",
 
     CREATE_SHOP: "/create-shop",
+    SHOP_INVITAIONS: "/shop-invitations",
     SHOP: "/shop/:id",
     SHOP_MEMBERS: "/shop/:id/members",
 };

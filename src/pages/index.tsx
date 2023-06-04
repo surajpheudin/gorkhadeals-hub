@@ -6,10 +6,13 @@ import { useGetShops } from "@src/services/shop/queries";
 import { useCallback, useState } from "react";
 import ErrorPage from "./ErrorPage";
 import NoData from "@components/common/NoData";
+import { NAVIGATION_ROUTES } from "@src/routes/constants";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
+    const navigate = useNavigate();
     const [search, setSearch] = useState("");
     const { data, isError } = useGetShops({
-        search: search,
+        search,
     });
 
     const handleSearch = useCallback(
@@ -27,7 +30,13 @@ const Home = () => {
             <TopBar setSearch={handleSearch} />
 
             {data?.length === 0 ? (
-                <NoData />
+                <NoData
+                    mt={8}
+                    buttonLabel="Add Shop"
+                    onClick={() => navigate(NAVIGATION_ROUTES.CREATE_SHOP)}
+                >
+                    You haven&apos;t created any shops yet
+                </NoData>
             ) : (
                 <Grid
                     mt={"12"}
