@@ -1,5 +1,4 @@
 import DashbaordLayout from "@components/common/DashboardLayout";
-import GlobalLoader from "@components/common/GlobalLoader/GlobalLoader";
 import LoginLayout from "@components/common/LoginLayout";
 import Home from "@src/pages";
 import CreateShop from "@src/pages/CreateShop";
@@ -48,10 +47,6 @@ export const router = createBrowserRouter([
                 element: <ShopMembers />,
             },
         ],
-    },
-    {
-        path: NAVIGATION_ROUTES.LOGIN,
-        element: <GlobalLoader />,
     },
     {
         path: NAVIGATION_ROUTES.REST,

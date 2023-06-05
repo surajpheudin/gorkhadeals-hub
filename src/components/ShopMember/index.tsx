@@ -1,6 +1,7 @@
 import { Avatar, Box, Button, Flex, Grid, Text } from "@chakra-ui/react";
 import { IRole, IUser, MemberStatus } from "@src/@types/modal";
 import { useRemoveShopMember } from "@src/services/shop/mutations";
+import { useGetLoggedInUser } from "@src/services/user/queries";
 
 const ShopMember = ({
     status,
@@ -10,6 +11,7 @@ const ShopMember = ({
     userShopId,
     shopId,
 }: IShopMember) => {
+    const { data } = useGetLoggedInUser();
     const { mutate, isLoading } = useRemoveShopMember();
     const handleRemoveMember = () => {
         mutate({
@@ -17,6 +19,8 @@ const ShopMember = ({
             userShopId: userShopId,
         });
     };
+
+    const self = data?.id === user?.id;
     return (
         <Grid
             gridTemplateColumns={{ lg: "repeat(4, 1fr)" }}
@@ -46,7 +50,7 @@ const ShopMember = ({
                     onClick={handleRemoveMember}
                     isLoading={isLoading}
                 >
-                    Remove
+                    {self ? "Leave" : "Remove"}{" "}
                 </Button>
             </Flex>
         </Grid>

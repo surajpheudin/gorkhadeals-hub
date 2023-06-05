@@ -12,6 +12,7 @@ import Modal from "@components/common/Modal";
 import NoData from "@components/common/NoData";
 import SelectField from "@components/common/SelectField";
 import { ISelectOption } from "@components/common/SelectField/interface";
+import ComponentLoader from "@components/library/ComponentLoader";
 import ShopMember from "@components/ShopMember";
 import { IShopMember, MemberStatus } from "@src/@types/modal";
 import { useGetShopMembers } from "@src/services/shop/queries";
@@ -28,7 +29,7 @@ const ShopMembers = () => {
         defaultValues,
     });
 
-    const { data, isSuccess } = useGetShopMembers({
+    const { data, isSuccess, isLoading } = useGetShopMembers({
         id,
         search: "",
     });
@@ -49,6 +50,10 @@ const ShopMembers = () => {
             setFilteredData(data);
         }
     }, [data, isSuccess]);
+
+    if (isLoading) {
+        return <ComponentLoader />;
+    }
 
     return (
         <>

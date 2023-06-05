@@ -1,5 +1,5 @@
 import { Box, Heading } from "@chakra-ui/react";
-import GlobalLoader from "@components/common/GlobalLoader/GlobalLoader";
+import ComponentLoader from "@components/library/ComponentLoader";
 import { useGetShop } from "@src/services/shop/queries";
 import { useParams } from "react-router-dom";
 import ErrorPage from "../ErrorPage";
@@ -10,7 +10,7 @@ const Shop = () => {
 
     const { data: shop, isLoading, isError } = useGetShop(id);
     if (isLoading) {
-        return <GlobalLoader />;
+        return <ComponentLoader />;
     }
     if (isError) {
         return <ErrorPage />;
