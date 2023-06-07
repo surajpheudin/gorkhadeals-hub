@@ -1,24 +1,21 @@
 import {
     AddBusinessIcon,
-    InviteIcon,
+    BoxesIcon,
     PeopleIcon,
     SettingsIcon,
 } from "@assets/svgs";
 import { Flex, Grid, Text } from "@chakra-ui/react";
 import { NAVIGATION_ROUTES } from "@src/routes/constants";
-import { useLocation } from "react-router-dom";
+import { useGetShop } from "@src/services/shop/queries";
+import { useParams } from "react-router-dom";
 import { HEADER_HEIGHT } from "../Header";
 import NavItem from "./NavItem";
 
 const Sidebar = () => {
-    const location = useLocation();
-    const isUserSidebar = [
-        NAVIGATION_ROUTES.HOME,
-        NAVIGATION_ROUTES.CREATE_SHOP,
-        NAVIGATION_ROUTES.SHOP_INVITAIONS,
-    ].includes(location.pathname);
+    const params = useParams();
+    const id = params?.id ?? "";
 
-    const menu = isUserSidebar ? MENUS : SHOP_MENUS;
+    const { data: shop } = useGetShop(id);
     return (
         <Grid
             alignContent={"flex-start"}
@@ -37,9 +34,16 @@ const Sidebar = () => {
                 alignItems="center"
                 justifyContent={"center"}
             >
-                <Text textAlign={"center"}>Dashboard</Text>
+                <Text
+                    fontSize={"xl"}
+                    textAlign={"center"}
+                    fontWeight="medium"
+                    noOfLines={1}
+                >
+                    {shop?.displayName}
+                </Text>
             </Flex>
-            {menu.map(({ icon, label, to }) => (
+            {SHOP_MENUS.map(({ icon, label, to }) => (
                 <NavItem key={label} icon={icon} label={label} to={to} />
             ))}
         </Grid>
@@ -50,31 +54,23 @@ export default Sidebar;
 
 const SHOP_MENUS = [
     {
-        icon: SettingsIcon,
-        label: "Preference",
-        to: "",
-    },
-    {
         icon: PeopleIcon,
         label: "Members",
         to: NAVIGATION_ROUTES.SHOP_MEMBERS,
+    },
+    {
+        icon: BoxesIcon,
+        label: "Products",
+        to: NAVIGATION_ROUTES.SHOP_PRODUCTS,
     },
     {
         icon: AddBusinessIcon,
         label: "Integration (Addons)",
         to: "",
     },
-];
-
-const MENUS = [
     {
         icon: SettingsIcon,
         label: "Preference",
         to: "",
-    },
-    {
-        icon: InviteIcon,
-        label: "Invitations",
-        to: NAVIGATION_ROUTES.SHOP_INVITAIONS,
     },
 ];

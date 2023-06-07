@@ -19,4 +19,6 @@ export interface IDataTable<T> extends TableProps {
     primaryKey: keyof T;
     onRowClick?: (row: Row<T>) => void;
     tableContainerProps?: TableContainerProps;
+    noDataText?: string;
+    hideHeader?: boolean;
 }

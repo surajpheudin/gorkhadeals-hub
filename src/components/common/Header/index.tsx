@@ -1,4 +1,4 @@
-import { AddBusinessIcon, LogoutIcon, MenuUnfoldIcon } from "@assets/svgs";
+import { InviteIcon, LogoutIcon, MenuUnfoldIcon } from "@assets/svgs";
 import {
     Avatar,
     Flex,
@@ -8,12 +8,16 @@ import {
     MenuItem,
     MenuList,
     Icon,
+    Button,
 } from "@chakra-ui/react";
 import useSession from "@src/hooks/session";
+import { NAVIGATION_ROUTES } from "@src/routes/constants";
 import { useGetLoggedInUser } from "@src/services/user/queries";
+import { useNavigate } from "react-router-dom";
 
-export const HEADER_HEIGHT = 60;
+export const HEADER_HEIGHT = 65;
 const Header = () => {
+    const navigate = useNavigate();
     const { data } = useGetLoggedInUser();
     const { handleLogout } = useSession();
 
@@ -37,53 +41,36 @@ const Header = () => {
             <Flex pr={4}>
                 <Menu>
                     <MenuButton
-                        as={IconButton}
+                        as={Button}
                         aria-label="Options"
-                        icon={
+                        leftIcon={
                             <Avatar
                                 size={"sm"}
                                 src={data?.picture}
                                 referrerPolicy="no-referrer"
                             />
                         }
-                        variant="unstyled"
-                    />
+                        variant="ghost"
+                        display="flex"
+                        alignItems="center"
+                    >
+                        {data?.fullname}
+                    </MenuButton>
                     <MenuList>
                         <MenuItem
+                            onClick={() =>
+                                navigate(NAVIGATION_ROUTES.SHOP_INVITAIONS)
+                            }
                             icon={
                                 <Icon
                                     fontSize={"md"}
                                     display={"flex"}
                                     alignItems={"center"}
-                                    as={AddBusinessIcon}
+                                    as={InviteIcon}
                                 />
                             }
                         >
-                            New Tab
-                        </MenuItem>
-                        <MenuItem
-                            icon={
-                                <Icon
-                                    fontSize={"md"}
-                                    display={"flex"}
-                                    alignItems={"center"}
-                                    as={AddBusinessIcon}
-                                />
-                            }
-                        >
-                            New Window
-                        </MenuItem>
-                        <MenuItem
-                            icon={
-                                <Icon
-                                    fontSize={"md"}
-                                    display={"flex"}
-                                    alignItems={"center"}
-                                    as={AddBusinessIcon}
-                                />
-                            }
-                        >
-                            Open Closed Tab
+                            Invitations
                         </MenuItem>
                         <MenuItem
                             onClick={handleLogout}

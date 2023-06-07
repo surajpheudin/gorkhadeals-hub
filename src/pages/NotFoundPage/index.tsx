@@ -1,8 +1,8 @@
 import { Box, Text, Button } from "@chakra-ui/react";
-import { NAVIGATION_ROUTES } from "@src/routes/constants";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function NotFoundPage() {
+    const navigate = useNavigate();
     return (
         <Box
             display={"grid"}
@@ -10,15 +10,13 @@ export default function NotFoundPage() {
             minH={"100vh"}
             textAlign={"center"}
         >
-            <Box display={"grid"} gap={2}>
+            <Box display={"grid"} gap={5}>
                 <Text fontSize={"4xl"}>404</Text>
                 <Text fontSize={"2xl"}>Oops! Page Not Found</Text>
                 <Text>
                     Sorry, the page you are looking for doesn&apos;t exist.
                 </Text>
-                <Button>
-                    <Link to={NAVIGATION_ROUTES.HOME}>Return Home</Link>
-                </Button>
+                <Button onClick={() => navigate(-1)}>Go Back</Button>
             </Box>
         </Box>
     );

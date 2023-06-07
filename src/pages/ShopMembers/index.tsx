@@ -79,7 +79,7 @@ const ShopMembers = () => {
                         <Flex gap={4}>
                             <SelectField
                                 name="status"
-                                backgroundColor={"white"}
+                                backgroundColor={"whiteAlpha.700"}
                                 control={control}
                                 options={options}
                                 onCustomChange={onStatusChange}

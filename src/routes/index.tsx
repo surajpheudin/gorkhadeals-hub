@@ -5,6 +5,7 @@ import CreateShop from "@src/pages/CreateShop";
 import ErrorPage from "@src/pages/ErrorPage";
 import Login from "@src/pages/Login";
 import NotFoundPage from "@src/pages/NotFoundPage";
+import Products from "@src/pages/Products";
 import Shop from "@src/pages/Shop";
 import ShopInvitation from "@src/pages/ShopInvitation";
 import ShopMembers from "@src/pages/ShopMembers";
@@ -25,6 +26,7 @@ export const router = createBrowserRouter([
     {
         path: NAVIGATION_ROUTES.HOME,
         element: <DashbaordLayout />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
@@ -45,6 +47,11 @@ export const router = createBrowserRouter([
             {
                 path: NAVIGATION_ROUTES.SHOP_MEMBERS,
                 element: <ShopMembers />,
+            },
+
+            {
+                path: NAVIGATION_ROUTES.SHOP_PRODUCTS,
+                element: <Products />,
             },
         ],
     },

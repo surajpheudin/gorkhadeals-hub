@@ -1,7 +1,12 @@
-import { Box, Flex, Heading } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading } from "@chakra-ui/react";
 import { IDataListLayout } from "./interface";
 
-const DataListLayout = ({ title, children }: IDataListLayout) => {
+const DataListLayout = ({
+    title,
+    children,
+    onAddClick,
+    addButtonLabel,
+}: IDataListLayout) => {
     return (
         <Box
             borderWidth={"1px"}
@@ -18,10 +23,18 @@ const DataListLayout = ({ title, children }: IDataListLayout) => {
                 px={6}
             >
                 <Heading fontSize={"2xl"}>{title}</Heading>
+                {onAddClick && (
+                    <Button
+                        colorScheme={"primary"}
+                        w={"120px"}
+                        onClick={onAddClick}
+                        width="180px"
+                    >
+                        {addButtonLabel || "Add"}
+                    </Button>
+                )}
             </Flex>
-            <Box py={4} px={6}>
-                {children}
-            </Box>
+            <Box>{children}</Box>
         </Box>
     );
 };

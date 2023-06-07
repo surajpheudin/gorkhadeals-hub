@@ -11,3 +11,4 @@ export { ReactComponent as ShopIcon } from "./svgs/shop.svg";
 export { ReactComponent as InviteIcon } from "./svgs/invite.svg";
 export { ReactComponent as PeopleRoofIcon } from "./svgs/people-roof.svg";
 export { ReactComponent as MoodEmptyIcon } from "./svgs/mood-empty.svg";
+export { ReactComponent as BoxesIcon } from "./svgs/boxes.svg";

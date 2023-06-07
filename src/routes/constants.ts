@@ -8,4 +8,8 @@ export const NAVIGATION_ROUTES = {
     SHOP_INVITAIONS: "/shop-invitations",
     SHOP: "/shop/:id",
     SHOP_MEMBERS: "/shop/:id/members",
+
+    PRODUCT: "/product/:id",
+    SHOP_PRODUCTS: "/shop/:id/products",
+    ADD_SHOP_PRODUCT: "/shop/:id/add-product",
 };

@@ -47,4 +47,8 @@ const DashbaordLayout = () => {
 
 export default withAuth(DashbaordLayout);
 
-const HIDE_SIDEBAR_AT: string[] = [];
+const HIDE_SIDEBAR_AT: string[] = [
+    NAVIGATION_ROUTES.HOME,
+    NAVIGATION_ROUTES.CREATE_SHOP,
+    NAVIGATION_ROUTES.SHOP_INVITAIONS,
+];

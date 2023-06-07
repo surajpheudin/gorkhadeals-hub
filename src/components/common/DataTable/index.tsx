@@ -30,6 +30,8 @@ const DataTable = <T,>(props: IDataTable<T>) => {
         onRowClick,
         isLoading,
         tableContainerProps,
+        noDataText,
+        hideHeader,
         ...others
     } = props;
     const [selectedRows, setSelectRows] = useState<string[]>([]);
@@ -105,48 +107,57 @@ const DataTable = <T,>(props: IDataTable<T>) => {
         >
             {isLoading && <Progress isIndeterminate size={"xs"} />}
             <Table {...others}>
-                <Thead backgroundColor={"gray.200"} position="sticky" top={0}>
-                    {table.getHeaderGroups().map((headerGroup) => (
-                        <Tr key={headerGroup.id}>
-                            {isRowSelectable && (
-                                <Th>
-                                    <Tooltip
-                                        hasArrow
-                                        label="Select All"
-                                        bg="gray.50"
-                                        color="black"
+                {!hideHeader && (
+                    <Thead
+                        backgroundColor={"gray.200"}
+                        position="sticky"
+                        top={0}
+                    >
+                        {table.getHeaderGroups().map((headerGroup) => (
+                            <Tr key={headerGroup.id}>
+                                {isRowSelectable && (
+                                    <Th>
+                                        <Tooltip
+                                            hasArrow
+                                            label="Select All"
+                                            bg="gray.50"
+                                            color="black"
+                                        >
+                                            <Box>
+                                                <Checkbox
+                                                    borderColor={"gray.400"}
+                                                    isChecked={
+                                                        selectedRows.length ===
+                                                        table.getRowModel().rows
+                                                            .length
+                                                    }
+                                                    onChange={
+                                                        handleChangeSelectAll
+                                                    }
+                                                />
+                                            </Box>
+                                        </Tooltip>
+                                    </Th>
+                                )}
+                                {headerGroup.headers.map((header) => (
+                                    <Th
+                                        key={header.id}
+                                        py={3}
+                                        textTransform="capitalize"
                                     >
-                                        <Box>
-                                            <Checkbox
-                                                borderColor={"gray.400"}
-                                                isChecked={
-                                                    selectedRows.length ===
-                                                    table.getRowModel().rows
-                                                        .length
-                                                }
-                                                onChange={handleChangeSelectAll}
-                                            />
-                                        </Box>
-                                    </Tooltip>
-                                </Th>
-                            )}
-                            {headerGroup.headers.map((header) => (
-                                <Th
-                                    key={header.id}
-                                    py={3}
-                                    textTransform="capitalize"
-                                >
-                                    {header.isPlaceholder
-                                        ? null
-                                        : flexRender(
-                                              header.column.columnDef.header,
-                                              header.getContext()
-                                          )}
-                                </Th>
-                            ))}
-                        </Tr>
-                    ))}
-                </Thead>
+                                        {header.isPlaceholder
+                                            ? null
+                                            : flexRender(
+                                                  header.column.columnDef
+                                                      .header,
+                                                  header.getContext()
+                                              )}
+                                    </Th>
+                                ))}
+                            </Tr>
+                        ))}
+                    </Thead>
+                )}
 
                 <Tbody>
                     {table.getRowModel().rows.map((row) => (
@@ -177,7 +188,11 @@ const DataTable = <T,>(props: IDataTable<T>) => {
                                 </Td>
                             )}
                             {row.getVisibleCells().map((cell) => (
-                                <Td key={cell.id} fontSize="sm">
+                                <Td
+                                    key={cell.id}
+                                    fontSize="sm"
+                                    width={cell.column.getSize()}
+                                >
                                     {flexRender(
                                         cell.column.columnDef.cell,
                                         cell.getContext()
@@ -189,7 +204,9 @@ const DataTable = <T,>(props: IDataTable<T>) => {
                 </Tbody>
             </Table>
             {!isLoading && table.getRowModel().rows.length === 0 && (
-                <NoData height={"300px"} />
+                <NoData height={"300px"}>
+                    {noDataText || "No results found."}
+                </NoData>
             )}
         </TableContainer>
     );
