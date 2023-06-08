@@ -37,9 +37,9 @@ const InputField = <T extends FieldValues>(props: IInputField<T>) => {
         <FormControl isInvalid={!!error} {...formControlProps}>
             {label && formControlProps?.variant !== "floating" && (
                 <FormLabel
-                    fontSize={"sm"}
                     fontWeight={"medium"}
-                    mb={3}
+                    mb={2}
+                    color="gray.700"
                     {...labelProps}
                 >
                     {label}
@@ -96,7 +96,7 @@ const CustomInput = <T extends FieldValues>({
     const { onChange, ...otherFields } = field;
 
     return (
-        <InputGroup borderColor={"gray.500"} size="lg">
+        <InputGroup colorScheme={"gray"} size="lg">
             {leftIcon && (
                 <InputLeftElement
                     color={labelProps?.color}

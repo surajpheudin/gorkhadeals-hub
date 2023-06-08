@@ -13,7 +13,7 @@ import NavItem from "./NavItem";
 
 const Sidebar = () => {
     const params = useParams();
-    const id = params?.id ?? "";
+    const id = params.id ?? "";
 
     const { data: shop } = useGetShop(id);
     return (

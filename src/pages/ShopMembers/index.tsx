@@ -22,7 +22,7 @@ import { useParams } from "react-router-dom";
 
 const ShopMembers = () => {
     const params = useParams();
-    const id = params?.id ?? "";
+    const id = params.id ?? "";
     const { isOpen, onClose, onOpen } = useDisclosure();
     const [filteredData, setFilteredData] = useState<IShopMember[]>([]);
     const { control } = useForm({

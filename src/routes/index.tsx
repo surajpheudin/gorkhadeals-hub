@@ -1,6 +1,7 @@
 import DashbaordLayout from "@components/common/DashboardLayout";
 import LoginLayout from "@components/common/LoginLayout";
 import Home from "@src/pages";
+import AddProduct from "@src/pages/AddProduct";
 import CreateShop from "@src/pages/CreateShop";
 import ErrorPage from "@src/pages/ErrorPage";
 import Login from "@src/pages/Login";
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
             {
                 path: NAVIGATION_ROUTES.SHOP_PRODUCTS,
                 element: <Products />,
+            },
+            {
+                path: NAVIGATION_ROUTES.ADD_SHOP_PRODUCT,
+                element: <AddProduct />,
             },
         ],
     },

@@ -16,6 +16,7 @@ const DataListLayout = ({
         >
             <Flex
                 justifyContent={"space-between"}
+                alignItems="center"
                 backgroundColor="gray.100"
                 borderBottomWidth="1px"
                 borderBottomColor={"gray.400"}

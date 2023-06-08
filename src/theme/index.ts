@@ -1,5 +1,6 @@
 import { extendTheme, ThemeConfig } from "@chakra-ui/react";
 import { buttonTheme } from "./components/buttonTheme";
+import formLabelTheme from "./components/formLabelTheme";
 import headingTheme from "./components/headingTheme";
 import textTheme from "./components/textTheme";
 import breakpoints from "./foundations/breakpoints";
@@ -30,6 +31,7 @@ const theme = extendTheme({
     semanticTokens,
     components: {
         Text: textTheme,
+        FormLabel: formLabelTheme,
         Heading: headingTheme,
         Button: buttonTheme,
     },

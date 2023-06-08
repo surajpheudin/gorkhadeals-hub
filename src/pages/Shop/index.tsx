@@ -5,10 +5,9 @@ import { useParams } from "react-router-dom";
 
 const Shop = () => {
     const params = useParams();
-    const id = params?.id ?? "";
+    const id = params.id ?? "";
 
     const { isLoading, isError } = useGetShop(id);
-    console.log("isError", isError);
 
     if (isLoading) {
         return <ComponentLoader />;

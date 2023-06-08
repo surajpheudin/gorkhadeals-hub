@@ -10,7 +10,7 @@ import { useInviteMember } from "@src/services/shop/mutations";
 
 const AddMemberForm = ({ onSuccess }: { onSuccess: () => void }) => {
     const params = useParams();
-    const id = params?.id ?? "";
+    const id = params.id ?? "";
     const {
         control,
         handleSubmit,
