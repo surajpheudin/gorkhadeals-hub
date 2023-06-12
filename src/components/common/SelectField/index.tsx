@@ -46,6 +46,9 @@ const SelectField = <T extends FieldValues>(props: ISelectField<T>) => {
                 }}
                 {...others}
                 borderRadius={"md"}
+                _placeholder={{
+                    color: "gray.200",
+                }}
             >
                 {options?.map(({ label, value }) => (
                     <option key={value} value={value}>
