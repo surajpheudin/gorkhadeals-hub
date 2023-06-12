@@ -6,12 +6,12 @@ import { IDropzone } from "./interface";
 
 const Dropzone = <T extends FieldValues>(props: IDropzone<T>) => {
     const {
-        setFiles,
         defaultImage,
         maxSizeInMb,
         accept = "",
         control,
         name,
+        label,
     } = props;
     const [previewImageSrc, setPreviewImageSrc] = useState("");
     const [error, setError] = useState("");
@@ -32,7 +32,6 @@ const Dropzone = <T extends FieldValues>(props: IDropzone<T>) => {
         } else {
             setError("");
             setPreviewImageSrc(URL.createObjectURL(files[0]));
-            setFiles(files);
             onChange(files);
         }
     };
@@ -58,6 +57,7 @@ const Dropzone = <T extends FieldValues>(props: IDropzone<T>) => {
                     },
                 }}
             >
+                {label && <Text mb={2}>{label}</Text>}
                 <MDropzone multiple={false} onDrop={handleImageChange}>
                     {({ getRootProps, getInputProps }) => (
                         <section>

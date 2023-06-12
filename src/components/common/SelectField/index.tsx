@@ -31,7 +31,7 @@ const SelectField = <T extends FieldValues>(props: ISelectField<T>) => {
                 <FormLabel
                     fontSize={"md"}
                     fontWeight={"medium"}
-                    mb={3}
+                    mb={2}
                     {...labelProps}
                 >
                     {label}

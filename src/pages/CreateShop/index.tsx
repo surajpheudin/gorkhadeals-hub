@@ -3,7 +3,6 @@ import Dropzone from "@components/common/Dropzone/Dropzone";
 import InputField from "@components/common/InputField";
 import { NAVIGATION_ROUTES } from "@src/routes/constants";
 import { useCreateShop } from "@src/services/shop/mutations";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { ICreateShopForm } from "./interface";
@@ -17,7 +16,6 @@ const defaultValues: ICreateShopForm = {
 
 const CreateShop = () => {
     const navigate = useNavigate();
-    const [, setFiles] = useState<File[] | null>(null);
 
     const { control, handleSubmit } = useForm<ICreateShopForm>({
         defaultValues,
@@ -60,7 +58,6 @@ const CreateShop = () => {
                             control={control}
                             accept="image/png, image/jpg, image/jpeg"
                             maxSizeInMb={2}
-                            setFiles={setFiles}
                         />
                     </GridItem>
                 </Grid>
