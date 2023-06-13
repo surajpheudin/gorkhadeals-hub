@@ -2,7 +2,7 @@ import { Box, Button, Flex } from "@chakra-ui/react";
 import withAuth from "@components/hoc/withAuth";
 import { NAVIGATION_ROUTES } from "@src/routes/constants";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import Header from "../Header";
+import Header, { HEADER_HEIGHT } from "../Header";
 import ShopsBar from "../ShopsBar";
 import Sidebar from "../Sidebar";
 
@@ -23,7 +23,7 @@ const DashbaordLayout = () => {
                     <Box
                         flexGrow={1}
                         as="main"
-                        h={"calc(100vh - 60px)"}
+                        h={`calc(100vh - ${HEADER_HEIGHT}px)`}
                         overflowY="auto"
                         p={5}
                     >

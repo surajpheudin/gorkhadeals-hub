@@ -3,6 +3,7 @@ import {
     Box,
     Button,
     Divider,
+    Flex,
     Grid,
     Heading,
     Icon,
@@ -13,16 +14,30 @@ import InputField from "@components/common/InputField";
 import SelectField from "@components/common/SelectField";
 import TextArea from "@components/common/TextArea";
 import { useFieldArray, useForm } from "react-hook-form";
+import { IAddProductFormData } from "./interface";
+import VariantTable from "./VariantTable";
 
 const AddProduct = () => {
-    const { control } = useForm<IAddProductFormData>({
+    const methods = useForm<IAddProductFormData>({
         defaultValues,
     });
+
+    const { control } = methods;
 
     const { fields: optionFields, append } = useFieldArray({
         control,
         name: "options",
     });
+
+    const showAddOptions = optionFields.length < 2;
+    const handleAddOptions = () => {
+        if (showAddOptions) {
+            append({
+                name: "",
+                values: [],
+            });
+        }
+    };
 
     return (
         <Box>
@@ -98,21 +113,6 @@ const AddProduct = () => {
                     borderRadius="md"
                 >
                     <Text fontWeight={"semibold"}>Variants</Text>
-                    <Button
-                        variant={"link"}
-                        colorScheme={"blue"}
-                        leftIcon={<Icon as={AddIcon} color="blue.600" />}
-                        onClick={() =>
-                            append({
-                                name: "",
-                                value: "",
-                            })
-                        }
-                        w="fit-content"
-                        mb={2}
-                    >
-                        Add options
-                    </Button>
 
                     {optionFields.map((field, index) => (
                         <Grid key={field.id} gap={4}>
@@ -120,19 +120,49 @@ const AddProduct = () => {
                                 label="Option Name"
                                 name={`options.${index}.name` as const}
                                 control={control}
-                                options={PRODUCT_VARIANT_OPTIONS}
-                                placeholder="Choose an option"
+                                options={PRODUCT_VARIANT_OPTIONS?.filter(
+                                    (item) =>
+                                        !optionFields.some(
+                                            (field) => field.name === item.value
+                                        )
+                                )}
+                                placeholder="Choose an option name"
                             />
                             <InputField
                                 label="Option Values"
-                                name={`options.${index}.value` as const}
+                                name={`options.${index}.values` as const}
                                 control={control}
                             />
                             <Divider borderColor={"gray.400"} />
                         </Grid>
                     ))}
+
+                    {showAddOptions && (
+                        <Button
+                            variant={"link"}
+                            colorScheme={"blue"}
+                            leftIcon={<Icon as={AddIcon} color="blue.600" />}
+                            onClick={handleAddOptions}
+                            w="fit-content"
+                            mb={2}
+                        >
+                            {optionFields.length > 0
+                                ? "Add more option"
+                                : "Add option"}
+                        </Button>
+                    )}
+
+                    <VariantTable
+                        methods={methods}
+                        optionFields={optionFields}
+                    />
                 </Grid>
             </Grid>
+            <Flex mt={6} justifyContent="flex-end">
+                <Button width="200px" colorScheme={"primary"}>
+                    Save
+                </Button>
+            </Flex>
         </Box>
     );
 };
@@ -169,15 +199,3 @@ const PRODUCT_VARIANT_OPTIONS = [
         value: "color",
     },
 ];
-
-interface IAddProductFormData {
-    category: string;
-    status: string;
-    name: string;
-    description: string;
-    image: FileList | null;
-    options: {
-        name: string;
-        value: string;
-    }[];
-}

@@ -79,7 +79,7 @@ const DataTable = <T,>(props: IDataTable<T>) => {
         <TableContainer
             backgroundColor={"white"}
             borderRadius={"md"}
-            pb={5}
+            pb={table.getRowModel().rows.length > 0 ? 5 : 0}
             sx={{
                 "&::-webkit-scrollbar": {
                     borderRadius: "full",
@@ -203,11 +203,9 @@ const DataTable = <T,>(props: IDataTable<T>) => {
                     ))}
                 </Tbody>
             </Table>
-            {!isLoading && table.getRowModel().rows.length === 0 && (
-                <NoData height={"300px"}>
-                    {noDataText || "No results found."}
-                </NoData>
-            )}
+            {!isLoading &&
+                table.getRowModel().rows.length === 0 &&
+                noDataText && <NoData height={"300px"}>{noDataText}</NoData>}
         </TableContainer>
     );
 };
