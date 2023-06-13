@@ -1,7 +1,7 @@
 import { Box, Grid } from "@chakra-ui/react";
 import TopBar from "@components/Home/TopBar";
 import ShopCard from "@components/ShopCard";
-import { debounce } from "lodash";
+import debounce from "lodash.debounce";
 import { useGetShops } from "@src/services/shop/queries";
 import { useCallback, useState } from "react";
 import ErrorPage from "./ErrorPage";

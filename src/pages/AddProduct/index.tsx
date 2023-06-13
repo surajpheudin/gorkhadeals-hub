@@ -1,21 +1,11 @@
-import { AddIcon } from "@assets/svgs";
-import {
-    Box,
-    Button,
-    Divider,
-    Flex,
-    Grid,
-    Heading,
-    Icon,
-    Text,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Grid, Heading } from "@chakra-ui/react";
 import Dropzone from "@components/common/Dropzone/Dropzone";
 import InputField from "@components/common/InputField";
 import SelectField from "@components/common/SelectField";
 import TextArea from "@components/common/TextArea";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { IAddProductFormData } from "./interface";
-import VariantTable from "./VariantTable";
+import ProductVariantForm from "./ProductVariantForm";
 
 const AddProduct = () => {
     const methods = useForm<IAddProductFormData>({
@@ -23,21 +13,6 @@ const AddProduct = () => {
     });
 
     const { control } = methods;
-
-    const { fields: optionFields, append } = useFieldArray({
-        control,
-        name: "options",
-    });
-
-    const showAddOptions = optionFields.length < 2;
-    const handleAddOptions = () => {
-        if (showAddOptions) {
-            append({
-                name: "",
-                values: [],
-            });
-        }
-    };
 
     return (
         <Box>
@@ -112,50 +87,7 @@ const AddProduct = () => {
                     p={4}
                     borderRadius="md"
                 >
-                    <Text fontWeight={"semibold"}>Variants</Text>
-
-                    {optionFields.map((field, index) => (
-                        <Grid key={field.id} gap={4}>
-                            <SelectField
-                                label="Option Name"
-                                name={`options.${index}.name` as const}
-                                control={control}
-                                options={PRODUCT_VARIANT_OPTIONS?.filter(
-                                    (item) =>
-                                        !optionFields.some(
-                                            (field) => field.name === item.value
-                                        )
-                                )}
-                                placeholder="Choose an option name"
-                            />
-                            <InputField
-                                label="Option Values"
-                                name={`options.${index}.values` as const}
-                                control={control}
-                            />
-                            <Divider borderColor={"gray.400"} />
-                        </Grid>
-                    ))}
-
-                    {showAddOptions && (
-                        <Button
-                            variant={"link"}
-                            colorScheme={"blue"}
-                            leftIcon={<Icon as={AddIcon} color="blue.600" />}
-                            onClick={handleAddOptions}
-                            w="fit-content"
-                            mb={2}
-                        >
-                            {optionFields.length > 0
-                                ? "Add more option"
-                                : "Add option"}
-                        </Button>
-                    )}
-
-                    <VariantTable
-                        methods={methods}
-                        optionFields={optionFields}
-                    />
+                    <ProductVariantForm methods={methods} />
                 </Grid>
             </Grid>
             <Flex mt={6} justifyContent="flex-end">
@@ -176,6 +108,9 @@ const defaultValues: IAddProductFormData = {
     description: "",
     image: null,
     options: [],
+    price: "",
+    stock: "",
+    sku: "",
 };
 
 const PRODUCT_STATUS_OPTIONS = [
@@ -186,16 +121,5 @@ const PRODUCT_STATUS_OPTIONS = [
     {
         label: "Draft",
         value: "draft",
-    },
-];
-
-const PRODUCT_VARIANT_OPTIONS = [
-    {
-        label: "Size",
-        value: "size",
-    },
-    {
-        label: "Color",
-        value: "color",
     },
 ];

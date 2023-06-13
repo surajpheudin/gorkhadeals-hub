@@ -8,4 +8,7 @@ export interface IAddProductFormData {
         name: string;
         values: string[];
     }[];
+    price: string;
+    stock: string;
+    sku: string;
 }
