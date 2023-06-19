@@ -6,24 +6,53 @@ import { FieldArrayWithId, UseFormReturn } from "react-hook-form";
 import { IAddProductFormData } from "../interface";
 
 const VariantTable = ({ methods }: IVariantFieldTable) => {
-    const data: IVariantField[] = [];
+    const data: IVariantField[] = methods
+        .watch("options")
+        ?.some((item) => item?.values?.length > 0)
+        ? methods.watch("options")?.map((item, i) => ({
+              id: i.toString(),
+              price: 0,
+              quantity: 0,
+              sku: "",
+          }))
+        : [];
 
     const columnHelper = createColumnHelper<IVariantField>();
     const columns = [
         columnHelper.accessor("id", {
-            cell: (info) => info.getValue(),
+            header: "Variant",
+            cell: (info) => +info.row.id + 1,
+            maxSize: 10,
         }),
         columnHelper.accessor("price", {
-            minSize: 300,
-            cell: () => <InputField name="name" control={methods.control} />,
+            cell: () => (
+                <InputField
+                    name="price"
+                    control={methods.control}
+                    placeholder="0"
+                />
+            ),
         }),
         columnHelper.accessor("id", {
             header: () => "Stock",
-            cell: () => <InputField name="name" control={methods.control} />,
+            cell: () => (
+                <InputField
+                    name="stock"
+                    control={methods.control}
+                    placeholder="0"
+                />
+            ),
         }),
         columnHelper.accessor("id", {
             header: () => "SKU",
-            cell: () => <InputField name="name" control={methods.control} />,
+            cell: () => (
+                <InputField
+                    name="sku"
+                    control={methods.control}
+                    placeholder="e.g. XYZ12345"
+                />
+            ),
+            minSize: 300,
         }),
         columnHelper.accessor("id", {
             header: () => "Action",

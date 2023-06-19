@@ -33,7 +33,36 @@ export interface IRole {
     createdAt: string;
     updateAt: string;
 }
+
+export interface IProduct {
+    id: string;
+    name: string;
+    description: string;
+    featuredImage: string;
+    shopId: string;
+    status: string;
+    productCategoryId: string | null;
+    createdAt: string;
+    updatedAt: string;
+    variants: IProductVariant[];
+}
+
+export interface IProductVariant {
+    id: string;
+    sku: string;
+    price: number;
+    stock: number;
+    images: string[];
+    productId: string;
+    createdAt: string;
+    updatedAt: string;
+}
+
 export type MemberStatus = "INVITED" | "JOINED";
+export enum ProductStatus {
+    ACTIVE,
+    DRAFT,
+}
 export type RoleName = "ADMINISTRATOR" | "MEMBER";
 export enum MimeTypes {
     ".aac" = "audio/aac",

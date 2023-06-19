@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import Card from "@components/library/Card";
 import { NAVIGATION_ROUTES } from "@src/routes/constants";
+import { addActiveShop } from "@src/utils/commonFunc";
 import { useNavigate } from "react-router-dom";
 import { IShopCard } from "./interface";
 
@@ -13,8 +14,10 @@ const ShopCard = ({
 }: IShopCard) => {
     const navigate = useNavigate();
     const handleClick = () => {
+        addActiveShop(id);
         navigate(NAVIGATION_ROUTES.SHOP.replace(":id", id?.toString()), {});
     };
+
     return (
         <Box
             p={{

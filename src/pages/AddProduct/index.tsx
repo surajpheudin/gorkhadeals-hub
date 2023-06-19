@@ -1,21 +1,47 @@
-import { Box, Button, Flex, Grid, Heading } from "@chakra-ui/react";
+import { Button, Flex, Grid, Heading } from "@chakra-ui/react";
 import Dropzone from "@components/common/Dropzone/Dropzone";
 import InputField from "@components/common/InputField";
 import SelectField from "@components/common/SelectField";
 import TextArea from "@components/common/TextArea";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useAddProduct } from "@src/services/product/mutations";
 import { useForm } from "react-hook-form";
-import { IAddProductFormData } from "./interface";
+import { useParams } from "react-router-dom";
+import { AddProductSchema, IAddProductFormData } from "./interface";
 import ProductVariantForm from "./ProductVariantForm";
 
 const AddProduct = () => {
+    const params = useParams();
+    const { mutate, isLoading } = useAddProduct();
     const methods = useForm<IAddProductFormData>({
         defaultValues,
+        resolver: yupResolver(AddProductSchema),
     });
 
-    const { control } = methods;
+    const { control, handleSubmit } = methods;
+
+    const onSubmit = (data: IAddProductFormData) => {
+        mutate(
+            {
+                description: data.description,
+                name: data.name,
+                status: data.status,
+                stock: +data.stock,
+                price: +data.price,
+                sku: data.sku,
+                shopId: params?.id ?? "",
+                featuredImage: "",
+            },
+            {
+                onSuccess: () => {
+                    methods.reset();
+                },
+            }
+        );
+    };
 
     return (
-        <Box>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <Heading fontSize={"2xl"} mb={4}>
                 Add Product
             </Heading>
@@ -91,19 +117,29 @@ const AddProduct = () => {
                 </Grid>
             </Grid>
             <Flex mt={6} justifyContent="flex-end">
-                <Button width="200px" colorScheme={"primary"}>
+                <Button
+                    type="submit"
+                    width="200px"
+                    colorScheme={"primary"}
+                    isLoading={isLoading}
+                >
                     Save
                 </Button>
             </Flex>
-        </Box>
+        </form>
     );
 };
 
 export default AddProduct;
 
+enum ProductStatus {
+    ACTIVE = "ACTIVE",
+    DRAFT = "DRAFT",
+}
+
 const defaultValues: IAddProductFormData = {
     category: "",
-    status: "active",
+    status: ProductStatus.ACTIVE,
     name: "",
     description: "",
     image: null,
@@ -116,10 +152,10 @@ const defaultValues: IAddProductFormData = {
 const PRODUCT_STATUS_OPTIONS = [
     {
         label: "Active",
-        value: "active",
+        value: ProductStatus.ACTIVE,
     },
     {
         label: "Draft",
-        value: "draft",
+        value: ProductStatus.DRAFT,
     },
 ];

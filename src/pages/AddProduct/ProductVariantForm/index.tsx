@@ -28,7 +28,7 @@ const ProductVariantForm = ({ methods }: IProductVariantForm) => {
     );
     const [tabIndex, setTabIndex] = useState(0);
     const bg = colors[tabIndex];
-    const { control } = methods;
+    const { control, setValue } = methods;
     const { fields: optionFields, append } = useFieldArray({
         control: methods.control,
         name: "options",
@@ -54,9 +54,9 @@ const ProductVariantForm = ({ methods }: IProductVariantForm) => {
                 <Tab>
                     <Text fontWeight={"semibold"}>Default Variant</Text>
                 </Tab>
-                <Tab>
+                {/* <Tab>
                     <Text fontWeight={"semibold"}>Multiple Variants</Text>
-                </Tab>
+                </Tab> */}
             </TabList>
             <TabPanels>
                 <TabPanel>
@@ -100,12 +100,17 @@ const ProductVariantForm = ({ methods }: IProductVariantForm) => {
                                 )}
                                 placeholder="Choose an option name"
                             />
-                            <InputField
-                                label="Option Values"
-                                name={`options.${index}.values` as const}
-                                control={control}
+
+                            <CreatableSelect
+                                onChange={(e) => {
+                                    console.log("e", e);
+                                    setValue(
+                                        `options.${index}.values`,
+                                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                        e?.map((item: any) => item?.value)
+                                    );
+                                }}
                             />
-                            <CreatableSelect />
                             <Divider borderColor={"gray.400"} mb={4} />
                         </Grid>
                     ))}

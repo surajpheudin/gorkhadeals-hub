@@ -25,14 +25,16 @@ const DataListLayout = ({
             >
                 <Heading fontSize={"2xl"}>{title}</Heading>
                 {onAddClick && (
-                    <Button
-                        colorScheme={"primary"}
-                        w={"120px"}
-                        onClick={onAddClick}
-                        width="180px"
-                    >
-                        {addButtonLabel || "Add"}
-                    </Button>
+                    <Flex>
+                        <Button
+                            colorScheme={"primary"}
+                            w={"120px"}
+                            onClick={onAddClick}
+                            width="180px"
+                        >
+                            {addButtonLabel || "Add"}
+                        </Button>
+                    </Flex>
                 )}
             </Flex>
             <Box>{children}</Box>

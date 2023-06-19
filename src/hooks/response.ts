@@ -19,16 +19,25 @@ const useHandleResponse = () => {
     }, []);
 
     const onError = useCallback((error: unknown) => {
-        let message = "Network Error";
+        let message: string | string[] = "Network Error";
 
         if (error instanceof AxiosError) {
             message = error?.response?.data?.message || error?.message;
         }
 
-        toast({
-            title: message,
-            status: "error",
-        });
+        if (Array.isArray(message)) {
+            message.forEach((msg) => {
+                toast({
+                    title: msg,
+                    status: "error",
+                });
+            });
+        } else {
+            toast({
+                title: message,
+                status: "error",
+            });
+        }
     }, []);
 
     return { onSuccess, onError };

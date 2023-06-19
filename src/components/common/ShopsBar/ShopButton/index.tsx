@@ -1,15 +1,16 @@
 import { Avatar, Box, Tooltip } from "@chakra-ui/react";
 import { NAVIGATION_ROUTES } from "@src/routes/constants";
-import { useLocation, useNavigate } from "react-router-dom";
+import { addActiveShop, getActiveShop } from "@src/utils/commonFunc";
+import { useNavigate } from "react-router-dom";
 
 const ShopButton = ({ id, name }: IShopButton) => {
-    const location = useLocation();
     const navigate = useNavigate();
 
     const to = NAVIGATION_ROUTES.SHOP.replace(":id", id?.toString());
-    const isActive = location.pathname === to;
+    const isActive = getActiveShop() === id;
 
     const handleClick = () => {
+        addActiveShop(id);
         navigate(to);
     };
     return (

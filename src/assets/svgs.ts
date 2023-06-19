@@ -12,3 +12,6 @@ export { ReactComponent as InviteIcon } from "./svgs/invite.svg";
 export { ReactComponent as PeopleRoofIcon } from "./svgs/people-roof.svg";
 export { ReactComponent as MoodEmptyIcon } from "./svgs/mood-empty.svg";
 export { ReactComponent as BoxesIcon } from "./svgs/boxes.svg";
+export { ReactComponent as EditIcon } from "./svgs/edit.svg";
+export { ReactComponent as DeleteIcon } from "./svgs/delete.svg";
+export { ReactComponent as DashboardIcon } from "./svgs/dashboard.svg";

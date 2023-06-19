@@ -3,11 +3,12 @@ import TopBar from "@components/Home/TopBar";
 import ShopCard from "@components/ShopCard";
 import debounce from "lodash.debounce";
 import { useGetShops } from "@src/services/shop/queries";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ErrorPage from "./ErrorPage";
 import NoData from "@components/common/NoData";
 import { NAVIGATION_ROUTES } from "@src/routes/constants";
 import { useNavigate } from "react-router-dom";
+import { removeActiveShop } from "@src/utils/commonFunc";
 const Home = () => {
     const navigate = useNavigate();
     const [search, setSearch] = useState("");
@@ -21,6 +22,10 @@ const Home = () => {
         }, 1000),
         []
     );
+
+    useEffect(() => {
+        removeActiveShop();
+    }, []);
 
     if (isError) {
         return <ErrorPage />;

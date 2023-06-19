@@ -1,6 +1,7 @@
 import {
     AddBusinessIcon,
     BoxesIcon,
+    DashboardIcon,
     PeopleIcon,
     SettingsIcon,
 } from "@assets/svgs";
@@ -53,6 +54,11 @@ const Sidebar = () => {
 export default Sidebar;
 
 const SHOP_MENUS = [
+    {
+        icon: DashboardIcon,
+        label: "Dashboard",
+        to: NAVIGATION_ROUTES.SHOP,
+    },
     {
         icon: PeopleIcon,
         label: "Members",

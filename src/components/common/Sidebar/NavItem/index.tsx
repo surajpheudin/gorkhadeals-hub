@@ -6,6 +6,9 @@ const NavItem = ({ icon, label, to }: INavItem) => {
     const location = useLocation();
     const params = useParams();
     const href = to.replace(":id", params.id ?? "");
+    console.log("href", href);
+    console.log("location.pathname", location.pathname);
+
     const isActive = href === location.pathname;
     return (
         <Flex

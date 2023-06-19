@@ -9,6 +9,9 @@ export const api = {
     acceptMemberInvitation: "shop/:id/accept",
     getShopMembers: "shop/:id/members",
     removeShopMember: "shop/:id/member",
+
+    addProduct: "product",
+    getProducts: "product",
 };
 
 export const ACCESS_TOKEN = "access_token";
