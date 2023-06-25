@@ -1,7 +1,7 @@
 import { useHandleResponse } from "@src/hooks/response";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "../axios.constants";
-import { acceptMemberInvitation, addProduct, inviteMember } from "./apis";
+import { addProduct, deleteProduct, editProduct } from "./apis";
 
 const useAddProduct = () => {
     const queryClient = useQueryClient();
@@ -18,34 +18,32 @@ const useAddProduct = () => {
     });
 };
 
-const useInviteMember = () => {
-    const queryClient = useQueryClient();
+const useEditProduct = () => {
     const { onError, onSuccess } = useHandleResponse();
     return useMutation({
-        mutationFn: inviteMember,
+        mutationFn: editProduct,
         onError,
         onSuccess: () => {
-            queryClient.invalidateQueries([api.getShopMembers]);
             onSuccess({
-                description: "Invitation sent successfully.",
+                description: "Congratulations! New product added successfully.",
             });
         },
     });
 };
 
-const useAcceptMemberInvitation = () => {
+const useDeleteProduct = () => {
     const queryClient = useQueryClient();
     const { onError, onSuccess } = useHandleResponse();
     return useMutation({
-        mutationFn: acceptMemberInvitation,
+        mutationFn: deleteProduct,
         onError,
         onSuccess: () => {
-            queryClient.invalidateQueries([api.getShopInvitations]);
+            queryClient.invalidateQueries([api.getProducts]);
             onSuccess({
-                description: "Shop joined successfully.",
+                description: "Product deleted successfully.",
             });
         },
     });
 };
 
-export { useAddProduct, useInviteMember, useAcceptMemberInvitation };
+export { useAddProduct, useEditProduct, useDeleteProduct };

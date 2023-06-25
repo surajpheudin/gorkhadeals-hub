@@ -12,6 +12,11 @@ export interface IAddProductRequest {
     featuredImage: string;
 }
 
+export interface IEditProductRequest extends IAddProductRequest {
+    id: string;
+    variantId: string;
+}
+
 export interface IGetProductsRequest {
     search: string;
     status?: ProductStatus;

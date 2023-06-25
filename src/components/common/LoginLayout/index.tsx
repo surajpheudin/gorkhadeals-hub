@@ -10,7 +10,7 @@ import {
 import { NavLink, Outlet } from "react-router-dom";
 
 const LoginLayout = () => {
-    const { toggleColorMode } = useColorMode();
+    const { colorMode, toggleColorMode } = useColorMode();
 
     return (
         <Box>
@@ -23,7 +23,11 @@ const LoginLayout = () => {
                     <FormLabel htmlFor="email-alerts" mb="0">
                         Dark Mode
                     </FormLabel>
-                    <Switch id="email-alerts" onChange={toggleColorMode} />
+                    <Switch
+                        checked={colorMode === "dark"}
+                        id="email-alerts"
+                        onChange={toggleColorMode}
+                    />
                 </FormControl>
             </Flex>
             <Outlet />

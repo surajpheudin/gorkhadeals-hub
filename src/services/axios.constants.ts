@@ -12,6 +12,8 @@ export const api = {
 
     addProduct: "product",
     getProducts: "product",
+    getProduct: "product/:id",
+    delteProduct: "product/:id",
 };
 
 export const ACCESS_TOKEN = "access_token";

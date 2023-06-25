@@ -4,23 +4,32 @@ import InputField from "@components/common/InputField";
 import SelectField from "@components/common/SelectField";
 import TextArea from "@components/common/TextArea";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useAddProduct } from "@src/services/product/mutations";
+import useLayout from "@src/hooks/layout";
+import { useAddProduct, useEditProduct } from "@src/services/product/mutations";
+import { useGetProduct } from "@src/services/product/queries";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { AddProductSchema, IAddProductFormData } from "./interface";
 import ProductVariantForm from "./ProductVariantForm";
 
 const AddProduct = () => {
     const params = useParams();
+    const location = useLocation();
+    const productId = location.state?.productId;
+    const isEdit = location.state?.edit;
+    const { scrollToTop } = useLayout();
     const { mutate, isLoading } = useAddProduct();
+    const { mutate: editProduct, isLoading: isLoadingEdit } = useEditProduct();
+    const { data: product, isSuccess, refetch } = useGetProduct(productId);
     const methods = useForm<IAddProductFormData>({
         defaultValues,
         resolver: yupResolver(AddProductSchema),
     });
 
-    const { control, handleSubmit } = methods;
+    const { control, handleSubmit, reset } = methods;
 
-    const onSubmit = (data: IAddProductFormData) => {
+    const addProduct = (data: IAddProductFormData) => {
         mutate(
             {
                 description: data.description,
@@ -35,15 +44,64 @@ const AddProduct = () => {
             {
                 onSuccess: () => {
                     methods.reset();
+                    scrollToTop();
                 },
             }
         );
     };
 
+    const editProductMutate = (data: IAddProductFormData) => {
+        editProduct(
+            {
+                id: productId,
+                description: data.description,
+                name: data.name,
+                status: data.status,
+                stock: +data.stock,
+                price: +data.price,
+                sku: data.sku,
+                shopId: params?.id ?? "",
+                featuredImage: "",
+                variantId: product?.variants?.[0]?.id ?? "",
+            },
+            {
+                onSuccess: () => {
+                    methods.reset();
+                    scrollToTop();
+                    refetch();
+                },
+            }
+        );
+    };
+
+    const onSubmit = (data: IAddProductFormData) => {
+        if (isEdit) {
+            editProductMutate(data);
+        } else {
+            addProduct(data);
+        }
+    };
+
+    useEffect(() => {
+        if (isSuccess) {
+            reset({
+                category: "",
+                status: product?.status,
+                name: product?.name,
+                description: product?.description,
+                image: null,
+                options: [],
+                price: product?.variants?.[0]?.price?.toString(),
+                stock: product?.variants?.[0]?.stock?.toString(),
+                sku: product?.variants?.[0]?.sku,
+            });
+        }
+    }, [isSuccess, product]);
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <Heading fontSize={"2xl"} mb={4}>
-                Add Product
+                {isEdit ? "Update Product" : "Add Product"}
             </Heading>
             <Grid gap={4}>
                 <Grid
@@ -121,9 +179,9 @@ const AddProduct = () => {
                     type="submit"
                     width="200px"
                     colorScheme={"primary"}
-                    isLoading={isLoading}
+                    isLoading={isLoading || isLoadingEdit}
                 >
-                    Save
+                    {isEdit ? "Update" : "Save"}
                 </Button>
             </Flex>
         </form>

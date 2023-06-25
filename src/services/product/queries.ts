@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../axios.constants";
-import { getProducts } from "./apis";
+import { getProduct, getProducts } from "./apis";
 import { IGetProductsRequest } from "./interface";
 
 const useGetProducts = (params: IGetProductsRequest) => {
@@ -10,4 +10,11 @@ const useGetProducts = (params: IGetProductsRequest) => {
     });
 };
 
-export { useGetProducts };
+const useGetProduct = (id: string) => {
+    return useQuery({
+        queryKey: [api.getProduct, id],
+        queryFn: getProduct(id),
+    });
+};
+
+export { useGetProducts, useGetProduct };
