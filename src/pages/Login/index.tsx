@@ -16,7 +16,7 @@ import {
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-const url = "http://localhost:8000/google";
+const url = `${import.meta.env.VITE_APP_BACKEND_URL}/google`;
 
 const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
