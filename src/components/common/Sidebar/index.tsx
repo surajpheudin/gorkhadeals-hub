@@ -26,7 +26,8 @@ const Sidebar = () => {
             h={"100vh"}
             backgroundColor="gray.50"
             zIndex={"dropdown"}
-            w="250px"
+            minW={"250px"}
+            maxW={"250px"}
         >
             <Flex
                 px={2}

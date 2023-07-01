@@ -1,4 +1,4 @@
-import { Box, Grid } from "@chakra-ui/react";
+import { Box, Grid, Heading } from "@chakra-ui/react";
 import TopBar from "@components/Home/TopBar";
 import ShopCard from "@components/ShopCard";
 import debounce from "lodash.debounce";
@@ -53,6 +53,18 @@ const Home = () => {
                     ))}
                 </Grid>
             )}
+
+            <Box mt={8}>
+                <Heading fontSize={"xl"} fontWeight="medium" mb={4}>
+                    Plan Current Usage
+                </Heading>
+            </Box>
+
+            <Box mt={8}>
+                <Heading fontSize={"xl"} fontWeight="medium" mb={4}>
+                    Inform Other People
+                </Heading>
+            </Box>
         </Box>
     );
 };

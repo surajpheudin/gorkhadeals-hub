@@ -33,6 +33,8 @@ const ShopsBar = () => {
             gridTemplateRows="auto 1fr auto"
             zIndex={"dropdown"}
             boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px"
+            minW="75px"
+            maxW="75px"
         >
             <Box mx={"auto"}>
                 <Box as={Link} to={NAVIGATION_ROUTES.HOME}>

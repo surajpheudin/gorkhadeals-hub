@@ -15,3 +15,6 @@ export { ReactComponent as BoxesIcon } from "./svgs/boxes.svg";
 export { ReactComponent as EditIcon } from "./svgs/edit.svg";
 export { ReactComponent as DeleteIcon } from "./svgs/delete.svg";
 export { ReactComponent as DashboardIcon } from "./svgs/dashboard.svg";
+export { ReactComponent as ClipboardIcon } from "./svgs/clipboard.svg";
+export { ReactComponent as EyeIcon } from "./svgs/eye.svg";
+export { ReactComponent as EyeSlashIcon } from "./svgs/eye-slash.svg";
