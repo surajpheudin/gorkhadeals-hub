@@ -1,7 +1,7 @@
 import { ProductStatus } from "@src/@types/modal";
 
 export interface IAddProductRequest {
-    category?: string;
+    productCategoryId: string;
     status: string;
     name: string;
     description: string;
@@ -20,6 +20,7 @@ export interface IEditProductRequest extends IAddProductRequest {
 export interface IGetProductsRequest {
     search: string;
     status?: ProductStatus;
+    shopId: string;
 }
 export interface IGetShopMembersRequest {
     id: string;

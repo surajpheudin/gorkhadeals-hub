@@ -29,6 +29,7 @@ const Products = () => {
     const { isOpen, onClose, onOpen } = useDisclosure();
     const { data, isFetching } = useGetProducts({
         search: "",
+        shopId: id,
     });
     const { mutate: deleteProduct, isLoading: isLoadingDelete } =
         useDeleteProduct();

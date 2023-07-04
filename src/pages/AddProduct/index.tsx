@@ -6,7 +6,10 @@ import TextArea from "@components/common/TextArea";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useLayout from "@src/hooks/layout";
 import { useAddProduct, useEditProduct } from "@src/services/product/mutations";
-import { useGetProduct } from "@src/services/product/queries";
+import {
+    useGetProduct,
+    useGetProductCategories,
+} from "@src/services/product/queries";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation, useParams } from "react-router-dom";
@@ -22,6 +25,8 @@ const AddProduct = () => {
     const { mutate, isLoading } = useAddProduct();
     const { mutate: editProduct, isLoading: isLoadingEdit } = useEditProduct();
     const { data: product, isSuccess, refetch } = useGetProduct(productId);
+    const { data: productCategories } = useGetProductCategories();
+
     const methods = useForm<IAddProductFormData>({
         defaultValues,
         resolver: yupResolver(AddProductSchema),
@@ -40,6 +45,7 @@ const AddProduct = () => {
                 sku: data.sku,
                 shopId: params?.id ?? "",
                 featuredImage: "",
+                productCategoryId: data.productCategoryId,
             },
             {
                 onSuccess: () => {
@@ -63,6 +69,7 @@ const AddProduct = () => {
                 shopId: params?.id ?? "",
                 featuredImage: "",
                 variantId: product?.variants?.[0]?.id ?? "",
+                productCategoryId: data.productCategoryId,
             },
             {
                 onSuccess: () => {
@@ -85,7 +92,7 @@ const AddProduct = () => {
     useEffect(() => {
         if (isSuccess) {
             reset({
-                category: "",
+                productCategoryId: product?.productCategoryId ?? "",
                 status: product?.status,
                 name: product?.name,
                 description: product?.description,
@@ -149,9 +156,16 @@ const AddProduct = () => {
                     borderRadius="md"
                 >
                     <SelectField
-                        name="category"
+                        name="productCategoryId"
                         control={control}
-                        options={[]}
+                        options={
+                            Array.isArray(productCategories)
+                                ? productCategories.map((item) => ({
+                                      label: item.name,
+                                      value: item.id,
+                                  }))
+                                : []
+                        }
                         label="Category"
                         placeholder="Select Category"
                     />
@@ -196,7 +210,7 @@ enum ProductStatus {
 }
 
 const defaultValues: IAddProductFormData = {
-    category: "",
+    productCategoryId: "",
     status: ProductStatus.ACTIVE,
     name: "",
     description: "",

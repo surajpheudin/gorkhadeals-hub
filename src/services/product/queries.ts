@@ -1,12 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../axios.constants";
-import { getProduct, getProducts } from "./apis";
+import { getProduct, getProductCategories, getProducts } from "./apis";
 import { IGetProductsRequest } from "./interface";
 
 const useGetProducts = (params: IGetProductsRequest) => {
     return useQuery({
         queryKey: [api.getProducts, params?.search],
         queryFn: getProducts(params),
+    });
+};
+
+const useGetProductCategories = () => {
+    return useQuery({
+        queryKey: [api.getProductCategories],
+        queryFn: getProductCategories(),
     });
 };
 
@@ -17,4 +24,4 @@ const useGetProduct = (id: string) => {
     });
 };
 
-export { useGetProducts, useGetProduct };
+export { useGetProducts, useGetProduct, useGetProductCategories };

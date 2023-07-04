@@ -13,6 +13,7 @@ export const api = {
     addProduct: "product",
     getProducts: "product",
     getProduct: "product/:id",
+    getProductCategories: "product/category",
     delteProduct: "product/:id",
 };
 

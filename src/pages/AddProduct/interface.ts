@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 export interface IAddProductFormData {
-    category: string;
+    productCategoryId: string;
     status: string;
     name: string;
     description: string;

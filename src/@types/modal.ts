@@ -47,6 +47,11 @@ export interface IProduct {
     variants: IProductVariant[];
 }
 
+export interface ICategory {
+    name: string;
+    children?: ICategory[];
+}
+
 export interface IProductVariant {
     id: string;
     sku: string;
