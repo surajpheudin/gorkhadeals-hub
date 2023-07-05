@@ -1,4 +1,4 @@
-import { Box, Grid, Progress } from "@chakra-ui/react";
+import { Box, Grid, Image, Progress } from "@chakra-ui/react";
 
 const GlobalLoader = () => {
     return (
@@ -11,8 +11,14 @@ const GlobalLoader = () => {
             display="grid"
             placeItems={"center"}
         >
-            <Grid gap={2}>
-                <Progress colorScheme={"primary"} size="xs" isIndeterminate />
+            <Grid gap={4}>
+                <Image src="/logo/logo.png" height={"40px"} mx="auto" />
+                <Progress
+                    width={"200px"}
+                    colorScheme={"blue"}
+                    size="xs"
+                    isIndeterminate
+                />
             </Grid>
         </Box>
     );
