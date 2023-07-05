@@ -24,8 +24,9 @@ const LoginLayout = () => {
                         Dark Mode
                     </FormLabel>
                     <Switch
-                        checked={colorMode === "dark"}
+                        isChecked={colorMode === "dark"}
                         id="email-alerts"
+                        colorScheme={"facebook"}
                         onChange={toggleColorMode}
                     />
                 </FormControl>
