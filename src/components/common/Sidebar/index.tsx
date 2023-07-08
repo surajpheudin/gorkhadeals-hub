@@ -4,6 +4,7 @@ import {
     DashboardIcon,
     PeopleIcon,
     SettingsIcon,
+    ShoppingCartIcon,
 } from "@assets/svgs";
 import { Flex, Grid, Text } from "@chakra-ui/react";
 import { NAVIGATION_ROUTES } from "@src/routes/constants";
@@ -69,6 +70,11 @@ const SHOP_MENUS = [
         icon: BoxesIcon,
         label: "Products",
         to: NAVIGATION_ROUTES.SHOP_PRODUCTS,
+    },
+    {
+        icon: ShoppingCartIcon,
+        label: "Orders",
+        to: NAVIGATION_ROUTES.HOME,
     },
     {
         icon: AddBusinessIcon,

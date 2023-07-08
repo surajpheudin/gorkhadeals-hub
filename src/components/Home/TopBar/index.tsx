@@ -1,11 +1,11 @@
 import { AddIcon, SearchIcon } from "@assets/svgs";
 import {
     Button,
-    Flex,
     Input,
     InputGroup,
     InputLeftElement,
     Icon,
+    Flex,
 } from "@chakra-ui/react";
 import { NAVIGATION_ROUTES } from "@src/routes/constants";
 import { useNavigate } from "react-router-dom";
@@ -28,6 +28,7 @@ const TopBar = ({ setSearch }: ITopBar) => {
                 colorScheme={"primary"}
                 leftIcon={<Icon as={AddIcon} />}
                 onClick={() => navigate(NAVIGATION_ROUTES.CREATE_SHOP)}
+                minW="fit-content"
             >
                 Add Shop
             </Button>

@@ -16,7 +16,7 @@ import { useGetLoggedInUser } from "@src/services/user/queries";
 import { useNavigate } from "react-router-dom";
 
 export const HEADER_HEIGHT = 65;
-const Header = () => {
+const Header = ({ onOpenDrawer }: IHeader) => {
     const navigate = useNavigate();
     const { data } = useGetLoggedInUser();
     const { handleLogout } = useSession();
@@ -37,6 +37,7 @@ const Header = () => {
                 display={{
                     lg: "none",
                 }}
+                onClick={onOpenDrawer}
             />
             <Flex pr={4}>
                 <Menu>
@@ -93,3 +94,7 @@ const Header = () => {
 };
 
 export default Header;
+
+interface IHeader {
+    onOpenDrawer: () => void;
+}

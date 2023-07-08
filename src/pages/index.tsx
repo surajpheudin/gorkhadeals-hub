@@ -31,7 +31,11 @@ const Home = () => {
         return <ErrorPage />;
     }
     return (
-        <Box p={4}>
+        <Box
+            p={{
+                lg: 4,
+            }}
+        >
             <TopBar setSearch={handleSearch} />
 
             {data?.length === 0 ? (

@@ -18,3 +18,4 @@ export { ReactComponent as DashboardIcon } from "./svgs/dashboard.svg";
 export { ReactComponent as ClipboardIcon } from "./svgs/clipboard.svg";
 export { ReactComponent as EyeIcon } from "./svgs/eye.svg";
 export { ReactComponent as EyeSlashIcon } from "./svgs/eye-slash.svg";
+export { ReactComponent as ShoppingCartIcon } from "./svgs/shopping-cart.svg";
